@@ -3,6 +3,8 @@ import {ArrowUpRight,Copy,Check} from 'lucide-react';
 import {services,config} from '../data/content';
 import type {Locale} from '../data/content';
 import {whatsappUrl} from '../lib/booking';
+import ServiceDropdown from './ServiceDropdown';
+
 export default function BookingForm({locale,serviceId,onService}:{locale:Locale;serviceId:string;onService:(id:string)=>void}){
  const vi=locale==='vi';const [name,setName]=useState('');const [phone,setPhone]=useState('');const [duration,setDuration]=useState('60');const [errors,setErrors]=useState<Record<string,string>>({});const [preview,setPreview]=useState('');const [copied,setCopied]=useState(false);const [copyError,setCopyError]=useState(false);
  useEffect(()=>{setPreview('');setCopied(false)},[serviceId,locale]);
@@ -12,8 +14,21 @@ export default function BookingForm({locale,serviceId,onService}:{locale:Locale;
  <div className="form-top"><span>{vi?'BẮT ĐẦU BẰNG MỘT LỜI NHẮN':'IT STARTS WITH A CONVERSATION'}</span><span className="demo">DEMO</span></div><h3 className="compact-title">{vi?'Một khoảng nghỉ cho bạn.':'A moment just for you.'}</h3><p className="form-hint">{vi?'Để lại 3 thông tin để bắt đầu cuộc trò chuyện.':'Just three details to start the conversation.'}</p>
  <div className="three-fields"><label htmlFor="booking-name">{vi?'Họ tên *':'Full name *'}</label><input id="booking-name" autoComplete="name" required value={name} maxLength={100} placeholder={vi?'Họ và tên của bạn':'Your full name'} aria-invalid={!!errors.name} aria-describedby={errors.name?'name-error':undefined} onChange={e=>{setName(e.target.value);reset()}}/>{errors.name&&<p className="error" id="name-error">{vi?'Vui lòng nhập họ tên.':'Please enter your name.'}</p>}
  <label htmlFor="booking-phone">{vi?'Số điện thoại *':'Phone number *'}</label><input id="booking-phone" type="tel" inputMode="tel" autoComplete="tel" required value={phone} maxLength={24} placeholder={vi?'Số điện thoại liên hệ':'Your phone number'} aria-invalid={!!errors.phone} aria-describedby={errors.phone?'phone-error':undefined} onChange={e=>{setPhone(e.target.value);reset()}}/>{errors.phone&&<p className="error" id="phone-error">{vi?'Vui lòng nhập số điện thoại hợp lệ.':'Please enter a valid phone number.'}</p>}
- <label htmlFor="booking-service">{vi?'Gói dịch vụ quan tâm *':'Treatment of interest *'}</label><select id="booking-service" required value={serviceId+':'+selectedDuration} aria-invalid={!!errors.service} onChange={e=>{const [id,d]=e.target.value.split(':');onService(id);setDuration(d);reset()}}><option value="consult:60">{vi?'Nhờ tư vấn gói phù hợp':'Help me choose'}</option>{services.flatMap(s=>s.durations.map(d=><option key={s.id+d} value={s.id+':'+d}>{s.name[locale]} · {d} {vi?'phút':'min'}</option>))}</select>{errors.service&&<p className="error">{vi?'Vui lòng chọn gói dịch vụ.':'Please choose a treatment.'}</p>}</div>
+ <label htmlFor="booking-service">{vi?'Gói dịch vụ quan tâm *':'Treatment of interest *'}</label>
+ <ServiceDropdown
+   locale={locale}
+   serviceId={serviceId}
+   selectedDuration={selectedDuration}
+   hasError={!!errors.service}
+   onSelect={(id, d) => {
+     onService(id);
+     setDuration(d);
+     reset();
+   }}
+ />
+ {errors.service&&<p className="error">{vi?'Vui lòng chọn gói dịch vụ.':'Please choose a treatment.'}</p>}</div>
  <button className="button dark full" type="submit">{vi?'Soạn yêu cầu tư vấn':'Prepare my request'}<ArrowUpRight size={18}/></button><p className="form-hint compact-demo">{vi?'Bản duyệt chỉ soạn lời nhắn, chưa gửi thông tin hoặc giữ lịch. Kênh liên hệ chính thức đang chờ cấu hình.':'Preview only: prepares a message without submitting details or reserving a time. Official channels await configuration.'}</p>
  {preview&&<div className="summary" aria-live="polite"><h3>{vi?'Nội dung yêu cầu':'Your request'}</h3><pre className="request-preview">{preview}</pre><button className="button dark full" type="button" onClick={async()=>{try{await navigator.clipboard.writeText(preview);setCopied(true);setCopyError(false)}catch{setCopyError(true)}}}>{copied?<Check size={16}/>:<Copy size={16}/>} {copied?(vi?'Đã sao chép':'Copied'):(vi?'Sao chép lời nhắn':'Copy message')}</button>{copyError&&<p role="status">{vi?'Chọn nội dung trên để sao chép thủ công.':'Select the text above to copy it manually.'}</p>}{whatsapp&&<a className="button" href={whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp <ArrowUpRight size={16}/></a>}{config.zalo&&<a className="button" href={config.zalo} target="_blank" rel="noopener noreferrer">Zalo <ArrowUpRight size={16}/></a>}</div>}
  </form>
 }
+

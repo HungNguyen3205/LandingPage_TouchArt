@@ -7,8 +7,8 @@
  */
 
 // Cấu hình Bot Telegram và Chat ID
-// Gợi ý: Bạn có thể điền trực tiếp BOT_TOKEN vào đây, hoặc lưu trong Project Settings > Script Properties với key là TELEGRAM_BOT_TOKEN
-var TELEGRAM_BOT_TOKEN = PropertiesService.getScriptProperties().getProperty("TELEGRAM_BOT_TOKEN") || "THAY_TOKEN_BOT_CUA_BAN_VAO_DAY";
+// Bot: @trolyNotificationAI_bot
+var TELEGRAM_BOT_TOKEN = PropertiesService.getScriptProperties().getProperty("TELEGRAM_BOT_TOKEN") || "8700174286:AAGatWdVagYJSEUhrEmJfXef8JhqI8aCwOE";
 var TELEGRAM_CHAT_ID = "-5408040804";
 
 /**
@@ -219,3 +219,22 @@ function escapeHtml(text) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 }
+
+/**
+ * Hàm kiểm tra nhanh: bấm nút 'Run' (Chạy) hàm này trong Apps Script
+ * để kiểm tra xem bot @trolyNotificationAI_bot đã gửi được tin vào nhóm -5408040804 chưa
+ */
+function testSendTelegram() {
+  var now = new Date();
+  var timeStr = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
+  var result = sendTelegramMessage(
+    "Nguyễn Văn A (Test)",
+    "0901234567",
+    "Body Massage · 60 phút",
+    "60 phút",
+    "Tiếng Việt (VI)",
+    timeStr
+  );
+  Logger.log("Kết quả gửi test Telegram: " + (result ? "THÀNH CÔNG" : "THẤT BẠI"));
+}
+

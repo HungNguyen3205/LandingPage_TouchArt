@@ -16,19 +16,21 @@ Khi khách hàng gửi thông tin tư vấn trên website Touch Art (Họ tên, 
 
 ---
 
-## BƯỚC 2: CẤU HÌNH BOT TELEGRAM
+## BƯỚC 2: CẤU HÌNH BOT TELEGRAM (@trolyNotificationAI_bot)
 
-1. Trong file mã vừa dán, bạn sẽ thấy 2 dòng cấu hình ở đầu:
+1. Trong file mã vừa dán, Token và Chat ID đã được cấu hình sẵn chính xác:
    ```javascript
-   var TELEGRAM_BOT_TOKEN = "THAY_TOKEN_BOT_CUA_BAN_VAO_DAY";
+   // Bot: @trolyNotificationAI_bot
+   var TELEGRAM_BOT_TOKEN = "8700174286:AAGatWdVagYJSEUhrEmJfXef8JhqI8aCwOE";
    var TELEGRAM_CHAT_ID = "-5408040804";
    ```
-   *(Chat ID `-5408040804` đã được điền sẵn chính xác theo yêu cầu của bạn).*
 
-2. Thay `THAY_TOKEN_BOT_CUA_BAN_VAO_DAY` bằng Token của Bot Telegram:
-   - Nếu bạn đã có Bot: dán token dạng `123456789:ABCdefGHIjklMNO...` vào đây.
-   - Nếu chưa có Bot: Vào Telegram, chat với [@BotFather](https://t.me/BotFather), gõ `/newbot` làm theo hướng dẫn để lấy API Token.
-3. **Lưu ý quan trọng**: Đảm bảo bạn đã thêm Bot Telegram của bạn vào nhóm có Chat ID `-5408040804` và cấp quyền gửi tin nhắn cho bot!
+2. **Lưu ý quan trọng**: Đảm bảo bạn đã thêm bot **@trolyNotificationAI_bot** vào nhóm/kênh có Chat ID `-5408040804` và cấp quyền gửi tin nhắn (Send Messages) cho bot!
+
+3. **Kiểm tra thử ngay trong Apps Script**:
+   - Chọn hàm `testSendTelegram` trên thanh công cụ Apps Script.
+   - Bấm nút **Chạy (Run)**.
+   - Kiểm tra nhóm Telegram `-5408040804`: nếu nhận được tin nhắn mẫu thì kết nối bot đã hoạt động 100%!
 
 ---
 

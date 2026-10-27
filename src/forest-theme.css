@@ -74,3 +74,23 @@
 }
 
 @media(max-width:767px){.garden-landscape{inset:0}.garden-landscape>img{filter:saturate(.7) brightness(.85)}.garden-mist{background:linear-gradient(90deg,#f4f3ecf2 0%,#f4f3ecd9 35%,#f4f3ec66 80%,#243e3033),linear-gradient(0deg,#f4f3ec 0%,transparent 35%,#f4f3ec44)}.garden-hero p{color:#486446}.garden-whisper{background:#315337d9}.garden-motion-control{background:#315337f5}#journal,#contact{padding-left:24px;padding-right:24px}.three-field-form{padding-top:40px;border-radius:65px 65px 12px 12px}.three-fields input,.three-fields select{font-size:16px}.request-preview{font-size:12px}}
+
+/* Booking Form Live & Submission Styles */
+.live-indicator{display:inline-flex;align-items:center;gap:4px;color:#285230;font-weight:600}
+.spinner-icon{animation:spin-rotate 1s linear infinite}
+@keyframes spin-rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.submit-booking-btn:disabled{opacity:.75;cursor:not-allowed}
+.submit-error-banner{background:#fdf2f2;border:1px solid #f5c6cb;border-radius:8px;padding:10px 14px;font-size:12px;margin:8px 0}
+
+/* Success Card */
+.booking-success-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:50px 32px 40px}
+.success-icon-badge{width:68px;height:68px;border-radius:50%;background:#e2ecd4;color:#285230;display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 6px 20px #24482e18}
+.success-check-icon{color:#2e5635}
+.success-heading{font-size:26px;color:#22442a;margin-bottom:8px}
+.success-hint{font-size:12.5px;color:#506a4d;max-width:360px;line-height:1.75;margin-bottom:20px}
+.submitted-summary-box{width:100%;background:#edf3e5;border:1px solid #cedec0;border-radius:14px;padding:14px 18px;text-align:left;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:4px 0}
+.summary-row:not(:last-child){border-bottom:1px solid #deead1}
+.summary-label{color:#648061}
+.summary-val{color:#24462c;font-weight:600;text-align:right}
+

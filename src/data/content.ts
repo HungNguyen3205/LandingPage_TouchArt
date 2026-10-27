@@ -1,5 +1,6 @@
 export type Locale = 'vi' | 'en';
-export const config = { demo: true, whatsapp: '', zalo: '', email: '', address: '' };
+const envGoogleScriptUrl = typeof import.meta !== 'undefined' && (import.meta as any).env ? ((import.meta as any).env.VITE_GOOGLE_SCRIPT_URL || '') : '';
+export const config = { demo: true, whatsapp: '', zalo: '', email: '', address: '', googleScriptUrl: envGoogleScriptUrl };
 export const images = {
  hero: '/images/hero.jpg',
  detail: '/images/detail.jpg',

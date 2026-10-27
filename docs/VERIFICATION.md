@@ -1,9 +1,17 @@
-# Kiểm tra bản đầu
+# Kiểm tra bản Editorial Touch Art
 
-- Production build và TypeScript: đạt.
-- Node test: 4/4 đạt (thời lượng, thời gian, ưu tiên, tóm tắt và URL).
-- Không có thông tin kênh thật hoặc credential, không gọi dịch vụ gửi tin/lưu lead.
-- Giá được đánh dấu tham khảo theo bản duyệt, không có booking thành công giả.
-- Cần xác nhận dịch vụ, giá, phụ phí, địa điểm, chính sách, ảnh và kênh thật trước khi mở nhận khách.
-- Kiểm tra trực quan tự động chưa thực hiện được: Playwright có thư viện nhưng thiếu Chromium; tải Chromium thất bại trong môi trường hiện tại. Chưa xác nhận console, tải ảnh ngoài hoặc layout trên trình duyệt thật.
-- Dev server hoạt động với `npx vite --host 127.0.0.1` trong môi trường hạn chế network interfaces; trên máy phát triển thông thường dùng `npm run dev`.
+## Đã chạy
+
+- `npm run build`: TypeScript và Vite production build đạt.
+- `npm test`: 6/6 kiểm tra đạt: thời lượng theo dịch vụ, giờ quá khứ, ưu tiên người thực hiện, tóm tắt, encode WhatsApp, các mốc phụ phí 22:00/00:00/08:59/09:00 và chi tiết khách sạn.
+- Playwright + Chromium: không tràn ngang ở 360/390/768/1024/1440px; form tạo tóm tắt với giá đúng; chuyển Việt–Anh; mở lightbox và đóng bằng Escape; không có pageerror trong luồng kiểm tra.
+- Tải trực tiếp 14 route nội dung Việt/Anh: mỗi trang có một H1, không vào trạng thái không tìm thấy. Ảnh nội bộ không bị lỗi trong lần kiểm tra. Đã xem ảnh chụp màn hình desktop 1440px và mobile 390px.
+- Ảnh spa minh họa được lưu trong public/images để tránh phụ thuộc tải ảnh ngoài. Tranh thương hiệu lấy từ website tham chiếu, lưu trong public.
+
+## Giới hạn
+
+- Chưa có tài khoản WhatsApp/Zalo/Telegram/Messenger/WeChat/KakaoTalk/số điện thoại được xác nhận, vì vậy không kiểm tra gửi tin thật và không hiện nút liên hệ giả.
+- Chưa có backend, Sheets, Telegram notification, CMS, lịch trống, thanh toán hay đặt chỗ thật. Biểu mẫu chỉ tạo bản nháp; lựa chọn ngày giờ chưa giữ lịch.
+- Giá và phụ phí còn chờ studio duyệt. Khung 00:00–09:00 là dự kiến theo website nguồn, được ghi rõ trên giao diện; phụ phí không cộng dồn. Tại khách sạn báo giá riêng.
+- Duyệt ảnh/clip thật, nhân sự, chính sách hủy/đổi, kênh liên hệ và tên miền trước khi công bố. Bản duyệt giữ noindex.
+- Trang con sử dụng fallback SPA. Khi triển khai cần cấu hình rewrite; trang không tồn tại hiện giao diện 404 nhưng HTTP 404 phụ thuộc hosting. SEO prerender/SSR là bước triển khai sau khi duyệt tên miền.

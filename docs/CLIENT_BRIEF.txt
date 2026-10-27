@@ -1,0 +1,38 @@
+YÊU CẦU TRIỂN KHAI WEBSITE TOUCH ART — PHIÊN BẢN 1
+
+Phạm vi: massage thư giãn và bodywork chuyên nghiệp không mang tính tình dục tại 22 An Thượng 6, Đà Nẵng. Không đưa dịch vụ tình dục vào phạm vi này.
+
+MỤC TIÊU
+Ra mắt nhanh, ưu tiên điện thoại. Khách quét QR/tìm Google → xem gói → nhắn tư vấn qua kênh quen dùng → chọn nhà trị liệu riêng trong cuộc trò chuyện → xác nhận lịch. Không bắt tạo tài khoản; không bắt điền form trước khi nhắn.
+
+THIẾT KẾ
+Xanh rêu #0D3025, kem #F5F0E5, vàng champagne #D2B97D. Serif cho tiêu đề, sans-serif cho nội dung; thoáng, tinh tế, điểm nhấn thiên nhiên và nét cọ. Dùng ảnh/clip thật có quyền sử dụng, không tạo hồ sơ KTV hay đánh giá khách giả.
+
+CẤU TRÚC
+Trang chủ: định vị, địa chỉ, nút “Nhắn tư vấn & đặt lịch”, “Khám phá dịch vụ”. Bảng WhatsApp/Zalo/Telegram/Messenger/WeChat/KakaoTalk/gọi điện dễ thấy; nút tư vấn cố định trên điện thoại. Chỉ gắn tài khoản đã xác minh.
+Trang dịch vụ riêng: Body Massage 60 phút 500.000đ / 90 phút 700.000đ; Four Hands Massage 60 phút 1.700.000đ / 90 phút 2.100.000đ. Chủ studio duyệt lại trước công bố. Không hứa chữa bệnh.
+Ảnh/video/đội ngũ: ảnh được phép công bố, kỹ năng và ngôn ngữ. Không công khai liên hệ cá nhân hoặc lịch riêng của KTV. Khách nhắn để chọn người.
+Form tùy chọn: dịch vụ, thời lượng, ngày/giờ, studio/khách sạn, ghi chú → bản tóm tắt → chọn kênh nhắn. Không thu lại cùng thông tin nhiều lần.
+Trang địa điểm, cộng đồng tự nguyện, bài viết, FAQ, riêng tư và chính sách đổi/hủy.
+
+TƯ VẤN & BOOKING
+Nhắn trực tiếp luôn có sẵn. Điền sẵn nội dung nếu nền tảng hỗ trợ, nếu không cho sao chép trước khi mở ứng dụng. Không hứa mọi nền tảng đều hỗ trợ và không tự lấy danh tính người quét QR.
+Nếu lưu lead trước khi chuyển chat: xin một liên hệ cùng sự đồng ý xử lý booking, lưu thành công ở máy chủ rồi mới báo đã nhận và cấp mã yêu cầu. Nhấn chat không phải booking.
+Bot dùng menu/giá/giờ đã duyệt, có chuyển người trực; không giả trạng thái online hay hứa thời gian phản hồi. Chỉ tự xác nhận khi đã kết nối lịch thực tế.
+
+QUẢN TRỊ
+CMS để chủ studio tự sửa gói, giá, phụ phí, ảnh, KTV, liên hệ, địa điểm, bài viết, link nhóm và đơn. Trạng thái Mới/Đang tư vấn/Đã xác nhận/Hoàn thành/Hủy; có người xử lý, giá tại thời điểm gửi, phân quyền, sao lưu, xuất dữ liệu. Kiểm tra giường/phòng, KTV và thời gian chuẩn bị; chống gửi lặp và trùng lịch.
+Phụ phí menu: sau 22:00 +100.000đ; sau 00:00 +200.000đ. Chốt lại giờ kết thúc khung đêm và không cộng dồn trước vận hành. Khách sạn cần xác nhận phạm vi và giá riêng.
+
+SEO & MỞ RỘNG
+/vi/ và /en/ riêng; canonical/hreflang đúng, title/description riêng, H1 rõ, link HTML đọc được, ảnh nén có alt, video có ảnh bìa và tải khi cần. Menu bằng chữ, không chỉ ảnh. Có sitemap/Search Console; không cam kết lên top.
+Bản duyệt đang noindex và robots chặn thu thập. Chỉ gỡ khi chủ sở hữu duyệt công khai; cập nhật canonical, metadata, sitemap theo tên miền chính thức. Website cho khách không yêu cầu đăng nhập ChatGPT.
+Tách dữ liệu services, locations, therapist_profiles, articles, contact_channels, communities, booking_requests. Bắt đầu một địa điểm nhưng có thể thêm studio hoặc thương hiệu mới.
+QR in dùng đường dẫn ổn định trên tên miền chủ sở hữu, ví dụ /book; giữ redirect khi đổi phần mềm. Nguồn standee/CTV dùng mã không chứa dữ liệu cá nhân.
+
+NGHIỆM THU & BÀN GIAO
+Kiểm tra mobile/desktop, từng nút chat, form không nhận giờ quá khứ, phụ phí đúng, không báo đã xác nhận khi mới gửi, lưu đơn/thông báo hoạt động thật; không lộ dữ liệu khách. Đo lượt vào, chọn gói, mở chat, gửi yêu cầu và booking xác nhận riêng; không đưa liên hệ hoặc ghi chú vào analytics.
+Bàn giao tên miền, hosting, CMS, mã nguồn nếu có, tài khoản và hướng dẫn tự sửa. Các tài khoản đứng tên chủ sở hữu. Báo riêng phí làm web, hướng dẫn, công cụ định kỳ, tích hợp bot/hộp thư chung và bảo trì. Lịch tự động, thanh toán và hộp thư đa nền tảng là giai đoạn riêng.
+
+TRẠNG THÁI HIỆN TẠI
+Bản tương tác có trang Việt/Anh, dịch vụ, địa điểm, bài viết, form tạo nội dung tư vấn và QR mẫu. Chưa có backend/CMS, bot, lịch thật, lưu lead, thông báo hoặc liên kết kênh/nhóm chính thức. Không coi đây là hệ thống đang nhận booking thật.

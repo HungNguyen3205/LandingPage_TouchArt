@@ -61,9 +61,9 @@ Không mặc định xây CRM, dashboard, đăng nhập khách, lịch trống r
 
 Không bịa chứng chỉ, đánh giá, mức giá, địa chỉ, kênh liên hệ hoặc công dụng điều trị. Thiếu nội dung thật thì đánh dấu minh họa hoặc trạng thái cần cập nhật. Không hứa chữa bệnh hoặc kết quả không có cơ sở.
 
-### 4. Design system: Dark Luxury + Boutique Wellness
+### 4. Design system: Editorial Art + Boutique Wellness
 
-Tạo cảm giác sang trọng, ấm, yên tĩnh và dễ sử dụng trên điện thoại. Dark luxury phải phù hợp xanh rêu–kem–champagne khách đã yêu cầu.
+Chỉ đạo mới nhất: phong cách Editorial Art theo video người dùng cung cấp, nền kem chủ đạo, serif lớn, bố cục bất đối xứng, ảnh xếp lớp và animation nhẹ khi cuộn. Dùng xanh rêu cho điểm nhấn/booking/footer, champagne tiết chế. Không quay lại hero dark luxury toàn màn hình. Glassmorphism chỉ áp dụng ở header hoặc thanh CTA khi cần. Tạo cảm giác sang trọng, ấm, yên tĩnh và dễ sử dụng trên điện thoại.
 
 Bộ token khởi điểm cho Touch Art (đề xuất, kiểm tra tương phản trước khi dùng):
 - --color-bg: #101A16

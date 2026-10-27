@@ -22,9 +22,9 @@ Node 22.6+ (khuyến nghị Node 24). Deploy thư mục `dist` lên static hosti
 - `src/styles.css`: token và responsive.
 - `docs/AI_SYSTEM_PROMPT.md`: chỉ dẫn AI phát triển tiếp.
 
-Nguồn nội dung: https://touch-art-booking-studio.zestystoat512.chatgpt.site/ và `/catalog.js`, truy cập 28/10/2026 (Asia/Ho_Chi_Minh). Nguồn ghi `pricesApproved: false`, `bookingMode: draft-only`. Giá Body Massage 60/90 phút: 500.000/700.000đ; Four Hands 60/90 phút: 1.700.000/2.100.000đ. Địa chỉ theo bản duyệt: 22 An Thượng 6, Đà Nẵng. Phụ phí đêm là dự kiến cần xác nhận; bản này không cộng vào tổng giá hoặc nhận thanh toán.
+Nguồn nội dung: https://touch-art-booking-studio.zestystoat512.chatgpt.site/ và `/catalog.js`, truy cập 28/10/2026 (Asia/Ho_Chi_Minh). Nguồn ghi `pricesApproved: false`, `bookingMode: draft-only`. Giá Body Massage 60/90 phút: 500.000/700.000đ; Four Hands 60/90 phút: 1.700.000/2.100.000đ. Địa chỉ theo bản duyệt: 22 An Thượng 6, Đà Nẵng. Phụ phí đêm là dự kiến cần xác nhận; bản mới hiển thị riêng phụ phí và tổng tạm tính, không nhận thanh toán.
 
-Ảnh spa minh họa tải từ Unsplash, không đại diện nhân sự hay không gian đã xác minh. Font tải Google Fonts. Cần thay ảnh thật, hồ sơ có phép công bố và xác nhận chính sách trước khi vận hành.
+Ảnh spa minh họa nguồn Unsplash được lưu cùng dự án; không cần tải từ Unsplash khi mở trang, không đại diện nhân sự hay không gian đã xác minh. Font tải Google Fonts. Cần thay ảnh thật, hồ sơ có phép công bố và xác nhận chính sách trước khi vận hành.
 
 ## Trạng thái tích hợp
 
@@ -34,4 +34,10 @@ Không thu thập/lưu đăng ký, không gửi Google Sheets hoặc Telegram, k
 
 ## Kiểm tra
 
-`npm run build`: TypeScript và production bundle. `npm test`: kiểm tra thời lượng theo dịch vụ, thời gian quá khứ, ưu tiên hợp lệ, nội dung tin nhắn và encode URL. Kết quả và giới hạn kiểm tra được ghi tại `docs/VERIFICATION.md`.
+`npm run build`: TypeScript và production bundle. `npm test`: 6 kiểm tra thời lượng, thời gian, ưu tiên, tin nhắn, URL, phụ phí đêm và thông tin khách sạn. Kết quả và giới hạn kiểm tra được ghi tại `docs/VERIFICATION.md`.
+
+## Bản thiết kế Editorial
+
+Trang chủ được làm lại theo video tham chiếu: nền kem, typography serif lớn, ảnh xếp lớp, bố cục nghiên nhẹ và animation khi cuộn. Có 14 trang nội dung nhập từ nguồn Việt/Anh: hai dịch vụ, địa điểm, cộng đồng, riêng tư và hai bài viết cho mỗi ngôn ngữ. Route /vi/, /en/ và /book; bản duyệt giữ noindex. Liên kết mỗi dịch vụ và bài viết mở trang chi tiết.
+
+Form có lựa chọn nhờ tư vấn, studio/khách sạn/nhờ tư vấn địa điểm, trường khu vực khách sạn, phụ phí đêm dự kiến không cộng dồn, giá tạm tính và tóm tắt. Tất cả vẫn chờ xác nhận, không đặt chỗ tự động. File docs/CLIENT_BRIEF.txt giữ bản yêu cầu đầy đủ từ website nguồn; các mục CMS/bot/lịch thật trong brief là phạm vi mở rộng chưa triển khai.

@@ -1,6 +1,6 @@
 export type Locale = 'vi' | 'en';
 const envGoogleScriptUrl = typeof import.meta !== 'undefined' && (import.meta as any).env ? ((import.meta as any).env.VITE_GOOGLE_SCRIPT_URL || '') : '';
-export const config = { demo: true, whatsapp: '', zalo: '', email: '', address: '', googleScriptUrl: envGoogleScriptUrl };
+export const config = { demo: true, whatsapp: '', zalo: '', email: '', address: '', googleScriptUrl: envGoogleScriptUrl || 'https://script.google.com/macros/s/AKfycbyoDAEiAwH-5ETu_mLZ5eKE-7zylalRLMzjlLifvdM7A-9NQk7EEe0Hop048AlJX1w0/exec' };
 export const images = {
  hero: '/images/hero.jpg',
  detail: '/images/detail.jpg',

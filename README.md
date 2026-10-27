@@ -1,8 +1,8 @@
-# Touch Art — Massage & Bodywork
+# Touch Art — Slow Garden
 
-React + TypeScript + Vite, giao diện Việt–Anh theo tinh thần boutique wellness, xanh rêu–kem–champagne. Có menu lọc dịch vụ, chọn nhu cầu, bản tóm tắt, sao chép lời nhắn, FAQ và lightbox truy cập bằng bàn phím.
+Website React + TypeScript + Vite, Việt–Anh. Hướng giao diện hiện tại: khoảng 50% trắng ngà dịu, 50% xanh rêu, không gian cây xanh, lá rơi chậm và chuyển động nhẹ. Hero sáng–xanh; dịch vụ, booking, journal và footer xen kẽ các khu vực sáng.
 
-## Chạy dự án
+## Chạy
 
 ```sh
 npm ci
@@ -12,50 +12,34 @@ npm test
 npm run preview
 ```
 
-Node 22.6+ (khuyến nghị Node 24). Deploy thư mục `dist` lên static hosting. Có cấu hình rewrite Vercel và Netlify. Không cần backend cho bản soạn tin nhắn hiện tại.
+Node 22.6+; khuyến nghị Node 24. Deploy `dist` lên static hosting; đã có rewrite Vercel/Netlify. Trong môi trường hạn chế network interfaces dùng `npx vite --host 127.0.0.1`.
 
-## Nội dung và cấu hình
+## Nội dung và cấu trúc
 
-- `src/data/content.ts`: dịch vụ, giá, ảnh, Việt–Anh và kênh liên hệ. Điền `config.whatsapp` dạng +84…; `config.zalo` là URL tài khoản chính thức. Chưa cấu hình thì không hiện nút kênh giả.
-- `src/components/BookingForm.tsx`: biểu mẫu và trạng thái demo.
-- `src/lib/booking.ts`: validation, tóm tắt và URL WhatsApp.
-- `src/styles.css`: token và responsive.
-- `docs/AI_SYSTEM_PROMPT.md`: chỉ dẫn AI phát triển tiếp.
+- `src/data/content.ts`: dịch vụ, giá, Việt–Anh, ảnh và kênh liên hệ.
+- `src/data/pages.ts`: 14 trang chi tiết Việt/Anh nhập từ website nguồn: hai dịch vụ, địa điểm, cộng đồng, riêng tư và hai bài viết mỗi ngôn ngữ.
+- `src/components/BookingForm.tsx`: đúng 3 trường duy nhất — họ tên, số điện thoại, gói dịch vụ quan tâm. Thời lượng ghép trong dropdown gói; không có trường mở rộng hoặc trường bổ sung sau submit.
+- `src/components/GardenAtmosphere.tsx`: lá rơi, cành cây, điều khiển dừng, reduced-motion và tạm dừng khi tab ẩn.
+- `src/components/AmbientMusic.tsx`: “Giai điệu an yên / Quiet Garden”, giai điệu tổng hợp nguyên bản 128 giây với âm sắc dây gảy mềm, hòa âm trầm và reverb nhẹ, thay cho bản piano trước đó. Không sử dụng bản ghi bên thứ ba. Âm lượng ban đầu thấp, có fade và volume.
+- `src/styles.css`: layout và Slow Garden base; `src/forest-theme.css`: theme cân bằng trắng–xanh hiện tại.
+- `docs/AI_SYSTEM_PROMPT.md`: quy tắc phát triển; `docs/CLIENT_BRIEF.txt`: yêu cầu gốc từ website khách hàng.
 
-Nguồn nội dung: https://touch-art-booking-studio.zestystoat512.chatgpt.site/ và `/catalog.js`, truy cập 28/10/2026 (Asia/Ho_Chi_Minh). Nguồn ghi `pricesApproved: false`, `bookingMode: draft-only`. Giá Body Massage 60/90 phút: 500.000/700.000đ; Four Hands 60/90 phút: 1.700.000/2.100.000đ. Địa chỉ theo bản duyệt: 22 An Thượng 6, Đà Nẵng. Phụ phí đêm là dự kiến cần xác nhận; bản mới hiển thị riêng phụ phí và tổng tạm tính, không nhận thanh toán.
+## Nguồn và dữ liệu
 
-Ảnh spa minh họa nguồn Unsplash được lưu cùng dự án; không cần tải từ Unsplash khi mở trang, không đại diện nhân sự hay không gian đã xác minh. Font tải Google Fonts. Cần thay ảnh thật, hồ sơ có phép công bố và xác nhận chính sách trước khi vận hành.
+https://touch-art-booking-studio.zestystoat512.chatgpt.site/ và `/catalog.js` cùng các trang Việt–Anh tương ứng. Nguồn ghi `pricesApproved: false`, `bookingMode: draft-only`.
 
-## Trạng thái tích hợp
+Body Massage 60/90 phút: 500.000/700.000đ. Four Hands 60/90 phút: 1.700.000/2.100.000đ. Touch Art · 22 An Thượng 6, Đà Nẵng. Đây là thông tin theo bản duyệt, cần studio xác nhận. Phụ phí đêm và khách sạn cần tư vấn trước khi xác nhận lịch.
 
-Không thu thập/lưu đăng ký, không gửi Google Sheets hoặc Telegram, không có credentials. Chỉ tạo nội dung trong bộ nhớ; sao chép dùng clipboard. Chọn thời gian chưa giữ chỗ. WhatsApp mở nội dung soạn sẵn khi cấu hình; Zalo cần sao chép rồi mở kênh. Không có xác nhận đã gửi tin tự động.
+Ảnh minh họa nguồn Unsplash được lưu trong `public/images`; không đại diện nhân sự hoặc không gian đã xác minh của studio. Tranh thương hiệu từ website nguồn được lưu trong public. Font tải Google Fonts.
 
-Để lưu Sheets/Telegram cần bổ sung API server, consent, validation server, idempotency bền vững, hàng đợi thử lại Telegram và cấu hình secret phía server. Không thêm bot token vào frontend. Giá và địa điểm cần xác nhận trong hội thoại.
+## Trạng thái thật / demo
+
+Form chỉ kiểm tra 3 trường và tạo nội dung tin nhắn trong bộ nhớ để sao chép; chưa lưu/gửi lead hoặc giữ lịch. Bản xem trước giữ noindex. Không có backend, Sheets/Telegram notification, CMS, thanh toán hoặc lịch trống thực tế.
+
+Khi có tài khoản chính thức, cấu hình `config.whatsapp` dạng +84… và `config.zalo` là URL hợp lệ. Chưa có thì không hiện nút kênh giả. Không đưa bot token hoặc secrets vào frontend. Việc tích hợp backend cần thực hiện riêng.
+
+Nhạc thử tự phát nếu trình duyệt cho phép; khi bị chặn, thử lại ở lần tương tác đầu tiên. Không thể ép phát có tiếng trên mọi thiết bị. Người xem luôn tắt nhạc và điều chỉnh âm lượng được; tắt rồi không tự bật lại trong phiên. Chất lượng nghe cần nghiệm thu trên loa/tai nghe thực tế.
 
 ## Kiểm tra
 
-`npm run build`: TypeScript và production bundle. `npm test`: 6 kiểm tra thời lượng, thời gian, ưu tiên, tin nhắn, URL, phụ phí đêm và thông tin khách sạn. Kết quả và giới hạn kiểm tra được ghi tại `docs/VERIFICATION.md`.
-
-## Bản thiết kế Editorial
-
-Trang chủ được làm lại theo video tham chiếu: nền kem, typography serif lớn, ảnh xếp lớp, bố cục nghiên nhẹ và animation khi cuộn. Có 14 trang nội dung nhập từ nguồn Việt/Anh: hai dịch vụ, địa điểm, cộng đồng, riêng tư và hai bài viết cho mỗi ngôn ngữ. Route /vi/, /en/ và /book; bản duyệt giữ noindex. Liên kết mỗi dịch vụ và bài viết mở trang chi tiết.
-
-Form có lựa chọn nhờ tư vấn, studio/khách sạn/nhờ tư vấn địa điểm, trường khu vực khách sạn, phụ phí đêm dự kiến không cộng dồn, giá tạm tính và tóm tắt. Tất cả vẫn chờ xác nhận, không đặt chỗ tự động. File docs/CLIENT_BRIEF.txt giữ bản yêu cầu đầy đủ từ website nguồn; các mục CMS/bot/lịch thật trong brief là phạm vi mở rộng chưa triển khai.
-
-## Slow Garden — hướng thiết kế hiện tại
-
-Theo phản hồi mới nhất, hero chuyển sang không gian xanh nhiều cây: ảnh rừng minh họa được lưu trong public/images/garden.jpg, lớp sương sáng, cành lá SVG, ánh nắng dịch chuyển chậm và lá rơi 29–39 giây theo gió. Không còn collage ảnh nghiêng ở hero. Các section dùng xanh dịu, khung ảnh mềm và chuyển động nhẹ.
-
-`src/components/GardenAtmosphere.tsx` chứa lá rơi, cành cây và nút dừng chuyển động. Animation dùng CSS, không thêm thư viện; tự tạm dừng khi tab ẩn và tôn trọng reduced-motion. Lớp trang trí không chặn thao tác. Ảnh rừng là hình minh họa không gian xanh, không phải ảnh xác minh địa điểm Touch Art. Nguồn: https://images.unsplash.com/photo-1441974231531-c6227db76b6e (asset photo-1441974231531-c6227db76b6e).
-
-## Nhạc nền thư giãn
-
-Nút “Bật nhạc thư giãn” tạo bản nhạc ambient nguyên bản bằng Web Audio API: hợp âm sine chậm, reverb mềm, fade-in/fade-out. Không dùng bản ghi hoặc file nhạc của bên thứ ba, không có request mạng để phát âm thanh. Nhạc thử tự phát khi vào trang nếu trình duyệt cho phép, nếu bị chặn sẽ thử lại ở lần tương tác đầu tiên; có nút tắt và thanh âm lượng, tự dừng khi tab bị ẩn. Không lưu dữ liệu cá nhân để điều khiển nhạc; tôn trọng thao tác tắt của người xem trong phiên. Mã tại src/components/AmbientMusic.tsx. Chất lượng nghe thực tế phụ thuộc thiết bị/loa; cần nghe thử bằng tai khi nghiệm thu âm thanh.
-
-## Forest Dusk — bản chỉnh theo phản hồi
-
-Toàn bộ giao diện chuyển sang xanh rêu trầm, giảm nền kem sáng ở hero, menu, form, trang bài viết và các điều khiển. Theme tập trung tại src/forest-theme.css.
-
-Nhạc đổi sang “Piano · Vườn đêm”: giai điệu tổng hợp nguyên bản 96 giây, từng nốt có attack/decay và các họa âm mềm, thay cho pad ngân dài. Đây là âm thanh piano tổng hợp, không phải bản thu đàn thật. Tự phát chỉ khi chính sách trình duyệt cho phép; khi bị chặn, thử lại sau pointer/keyboard gesture. Người xem luôn tắt được nhạc và thay đổi âm lượng. Không thể bảo đảm autoplay có tiếng trên mọi trình duyệt.
-
-Form mặc định chỉ hiện một ô bắt buộc: số điện thoại/WhatsApp. Gói đang chọn được hiển thị cùng giá tạm tính. “Đổi gói / thêm mong muốn” mở dịch vụ+thời lượng, ngày giờ, địa điểm, ưu tiên và ghi chú. Không bắt nhập tên, ngày hoặc giờ. Vẫn là demo soạn tin nhắn, không gửi/lưu thông tin lên server.
+Build TypeScript/Vite, 8 kiểm tra logic nền, kiểm tra UI bằng Chromium; xem `docs/VERIFICATION.md` để biết phạm vi và giới hạn. Trang con dùng fallback SPA; HTTP 404 và SEO công khai phụ thuộc hosting/tên miền thực tế.

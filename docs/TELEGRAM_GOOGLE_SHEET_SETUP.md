@@ -66,17 +66,15 @@ VITE_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/AKfycbx.../exec
 3. Bấm **Gửi yêu cầu tư vấn**.
 4. Kiểm tra ngay:
    - Form hiển thị thông báo thành công đẹp mắt cùng thông tin tóm tắt.
-   - Google Sheet xuất hiện dòng thông tin mới với màu thương hiệu Touch Art.
+   - Google Sheet xuất hiện dòng thông tin mới thu gọn gồm đúng 4 cột thiết yếu:
+     `Thời gian` | `Họ tên` | `Số điện thoại` | `Gói dịch vụ`
    - Nhóm Telegram (`-5408040804`) nhận được tin nhắn thông báo tức thì:
      ```
      🌿 [TOUCH ART] CÓ YÊU CẦU TƯ VẤN MỚI
      ━━━━━━━━━━━━━━━━━━━━━━
      👤 Họ tên: Nguyễn Văn A
      📞 Số điện thoại: 0901234567
-     💆 Gói quan tâm: Body Massage · 60 phút
-     ⏱ Thời lượng: 60 phút
-     🌐 Ngôn ngữ: Tiếng Việt (VI)
+     💆 Gói dịch vụ: Body Massage · 60 phút
      🕒 Thời gian: 27/10/2026 23:45:00
      ━━━━━━━━━━━━━━━━━━━━━━
-     💡 Vui lòng mở Google Sheets hoặc liên hệ lại với khách hàng sớm nhất!
      ```

@@ -41,17 +41,13 @@ function doPost(e) {
     var now = new Date();
     var timeFormatted = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
 
-    // 1. Ghi dữ liệu vào Google Sheet
+    // 1. Ghi dữ liệu vào Google Sheet (tối giản 4 cột thiết yếu nhất)
     var sheet = getOrCreateSheet();
     sheet.appendRow([
       timeFormatted,
       name,
-      "'" + phone, // Thêm dấu ' ở đầu để Google Sheets hiểu là dạng chuỗi, không mất số 0 và tránh formula injection
-      packageName,
-      duration,
-      locale,
-      "Mới tiếp nhận",
-      note
+      "'" + phone, // Giữ dạng text để không mất số 0 đầu và chống injection
+      packageName
     ]);
 
     // 2. Gửi thông báo qua Telegram Bot
@@ -60,7 +56,7 @@ function doPost(e) {
 
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_BOT_TOKEN !== "THAY_TOKEN_BOT_CUA_BAN_VAO_DAY") {
       try {
-        telegramSent = sendTelegramMessage(name, phone, packageName, duration, locale, timeFormatted);
+        telegramSent = sendTelegramMessage(name, phone, packageName, timeFormatted);
       } catch (tErr) {
         telegramError = tErr.toString();
         Logger.log("Telegram Error: " + telegramError);
@@ -110,7 +106,7 @@ function doGet(e) {
 /**
  * Gửi tin nhắn đến Telegram Bot
  */
-function sendTelegramMessage(name, phone, packageName, duration, locale, timeStr) {
+function sendTelegramMessage(name, phone, packageName, timeStr) {
   var url = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage";
 
   var messageLines = [
@@ -118,12 +114,9 @@ function sendTelegramMessage(name, phone, packageName, duration, locale, timeStr
     "━━━━━━━━━━━━━━━━━━━━━━",
     "👤 <b>Họ tên:</b> " + escapeHtml(name),
     "📞 <b>Số điện thoại:</b> <code>" + escapeHtml(phone) + "</code>",
-    "💆 <b>Gói quan tâm:</b> " + escapeHtml(packageName),
-    "⏱ <b>Thời lượng:</b> " + escapeHtml(duration),
-    "🌐 <b>Ngôn ngữ:</b> " + escapeHtml(locale),
+    "💆 <b>Gói dịch vụ:</b> " + escapeHtml(packageName),
     "🕒 <b>Thời gian:</b> " + escapeHtml(timeStr),
-    "━━━━━━━━━━━━━━━━━━━━━━",
-    "💡 <i>Vui lòng mở Google Sheets hoặc liên hệ lại với khách hàng sớm nhất!</i>"
+    "━━━━━━━━━━━━━━━━━━━━━━"
   ];
 
   var payload = {
@@ -152,28 +145,20 @@ function sendTelegramMessage(name, phone, packageName, duration, locale, timeStr
  */
 function getOrCreateSheet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheetName = "Danh sách tư vấn";
-  var sheet = ss.getSheetByName(sheetName);
+  // Dùng trực tiếp trang tính đang mở của bảng tính
+  var sheet = ss.getActiveSheet() || ss.getSheets()[0];
 
-  if (!sheet) {
-    sheet = ss.insertSheet(sheetName);
-  }
-
-  // Nếu sheet rỗng, tạo dòng tiêu đề
+  // Nếu sheet rỗng, tạo tiêu đề 4 cột thu gọn nhất
   if (sheet.getLastRow() === 0) {
     var headers = [
-      "Thời gian gửi",
-      "Họ tên khách hàng",
+      "Thời gian",
+      "Họ tên",
       "Số điện thoại",
-      "Gói dịch vụ quan tâm",
-      "Thời lượng",
-      "Ngôn ngữ",
-      "Trạng thái liên hệ",
-      "Ghi chú"
+      "Gói dịch vụ"
     ];
     sheet.appendRow(headers);
 
-    // Định dạng dòng tiêu đề: nền xanh rêu thương hiệu Touch Art, chữ trắng đậm
+    // Định dạng tiêu đề: nền xanh rêu thương hiệu Touch Art, chữ trắng đậm
     var headerRange = sheet.getRange(1, 1, 1, headers.length);
     headerRange.setBackground("#244731");
     headerRange.setFontColor("#ffffff");
@@ -182,15 +167,11 @@ function getOrCreateSheet() {
     headerRange.setHorizontalAlignment("center");
     sheet.setFrozenRows(1);
 
-    // Đặt độ rộng các cột cho đẹp mắt
+    // Đặt độ rộng các cột tối giản
     sheet.setColumnWidth(1, 160); // Thời gian
     sheet.setColumnWidth(2, 180); // Họ tên
-    sheet.setColumnWidth(3, 140); // SĐT
-    sheet.setColumnWidth(4, 250); // Gói dịch vụ
-    sheet.setColumnWidth(5, 110); // Thời lượng
-    sheet.setColumnWidth(6, 130); // Ngôn ngữ
-    sheet.setColumnWidth(7, 150); // Trạng thái
-    sheet.setColumnWidth(8, 250); // Ghi chú
+    sheet.setColumnWidth(3, 140); // Số điện thoại
+    sheet.setColumnWidth(4, 260); // Gói dịch vụ
   }
 
   return sheet;
@@ -231,8 +212,6 @@ function testSendTelegram() {
     "Nguyễn Văn A (Test)",
     "0901234567",
     "Body Massage · 60 phút",
-    "60 phút",
-    "Tiếng Việt (VI)",
     timeStr
   );
   Logger.log("Kết quả gửi test Telegram: " + (result ? "THÀNH CÔNG" : "THẤT BẠI"));

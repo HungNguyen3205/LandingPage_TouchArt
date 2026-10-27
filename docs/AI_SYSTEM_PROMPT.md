@@ -63,7 +63,7 @@ Không bịa chứng chỉ, đánh giá, mức giá, địa chỉ, kênh liên h
 
 ### 4. Design system: Editorial Art + Boutique Wellness
 
-Chỉ đạo mới nhất: Slow Garden theo phản hồi người dùng. Không gian xanh nhiều cây, chiếc lá rơi chậm theo gió, ánh nắng dịu, cành lá đung đưa nhẹ. Tạo cảm giác người xem đang ở một khu vườn thư giãn. Không quay lại collage ảnh nghiêng hoặc animation phô trương. Giữ nội dung kinh doanh và luồng đặt lịch rõ ràng. Màu xanh lá/rêu và kem, chữ dễ đọc, khoảng thở rộng. Chuyển động CSS transform/opacity chậm; có nút tạm dừng, tự dừng khi tab ẩn và tôn trọng prefers-reduced-motion. Ảnh không gian thiên nhiên là minh họa, không trình bày như địa điểm thật của studio.
+Chỉ đạo mới nhất: Slow Garden theo phản hồi người dùng. Không gian xanh nhiều cây, chiếc lá rơi chậm theo gió, ánh nắng dịu, cành lá đung đưa nhẹ. Tạo cảm giác người xem đang ở một khu vườn thư giãn. Không quay lại collage ảnh nghiêng hoặc animation phô trương. Giữ nội dung kinh doanh và luồng đặt lịch rõ ràng. Màu xanh rêu trầm chiếm chủ đạo; giảm tối đa nền kem sáng để không chói mắt. Chữ xanh nhạt/trắng ngà dịu và khoảng thở rộng. Form mặc định chỉ một ô liên hệ, tùy chọn khác mở rộng. Nhạc piano ambient thử autoplay theo chính sách trình duyệt và fallback lần tương tác đầu tiên; luôn tôn trọng nút tắt. Chuyển động CSS transform/opacity chậm; có nút tạm dừng, tự dừng khi tab ẩn và tôn trọng prefers-reduced-motion. Ảnh không gian thiên nhiên là minh họa, không trình bày như địa điểm thật của studio.
 
 Bộ token khởi điểm cho Touch Art (đề xuất, kiểm tra tương phản trước khi dùng):
 - --color-bg: #101A16

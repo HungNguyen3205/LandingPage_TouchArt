@@ -50,4 +50,12 @@ Theo phản hồi mới nhất, hero chuyển sang không gian xanh nhiều cây
 
 ## Nhạc nền thư giãn
 
-Nút “Bật nhạc thư giãn” tạo bản nhạc ambient nguyên bản bằng Web Audio API: hợp âm sine chậm, reverb mềm, fade-in/fade-out. Không dùng bản ghi hoặc file nhạc của bên thứ ba, không có request mạng để phát âm thanh. Nhạc mặc định tắt, chỉ chạy sau thao tác của người dùng; có nút tắt và thanh âm lượng, tự dừng khi tab bị ẩn. Không lưu sở thích hoặc tự phát lại khi mở trang. Mã tại src/components/AmbientMusic.tsx. Chất lượng nghe thực tế phụ thuộc thiết bị/loa; cần nghe thử bằng tai khi nghiệm thu âm thanh.
+Nút “Bật nhạc thư giãn” tạo bản nhạc ambient nguyên bản bằng Web Audio API: hợp âm sine chậm, reverb mềm, fade-in/fade-out. Không dùng bản ghi hoặc file nhạc của bên thứ ba, không có request mạng để phát âm thanh. Nhạc thử tự phát khi vào trang nếu trình duyệt cho phép, nếu bị chặn sẽ thử lại ở lần tương tác đầu tiên; có nút tắt và thanh âm lượng, tự dừng khi tab bị ẩn. Không lưu dữ liệu cá nhân để điều khiển nhạc; tôn trọng thao tác tắt của người xem trong phiên. Mã tại src/components/AmbientMusic.tsx. Chất lượng nghe thực tế phụ thuộc thiết bị/loa; cần nghe thử bằng tai khi nghiệm thu âm thanh.
+
+## Forest Dusk — bản chỉnh theo phản hồi
+
+Toàn bộ giao diện chuyển sang xanh rêu trầm, giảm nền kem sáng ở hero, menu, form, trang bài viết và các điều khiển. Theme tập trung tại src/forest-theme.css.
+
+Nhạc đổi sang “Piano · Vườn đêm”: giai điệu tổng hợp nguyên bản 96 giây, từng nốt có attack/decay và các họa âm mềm, thay cho pad ngân dài. Đây là âm thanh piano tổng hợp, không phải bản thu đàn thật. Tự phát chỉ khi chính sách trình duyệt cho phép; khi bị chặn, thử lại sau pointer/keyboard gesture. Người xem luôn tắt được nhạc và thay đổi âm lượng. Không thể bảo đảm autoplay có tiếng trên mọi trình duyệt.
+
+Form mặc định chỉ hiện một ô bắt buộc: số điện thoại/WhatsApp. Gói đang chọn được hiển thị cùng giá tạm tính. “Đổi gói / thêm mong muốn” mở dịch vụ+thời lượng, ngày giờ, địa điểm, ưu tiên và ghi chú. Không bắt nhập tên, ngày hoặc giờ. Vẫn là demo soạn tin nhắn, không gửi/lưu thông tin lên server.

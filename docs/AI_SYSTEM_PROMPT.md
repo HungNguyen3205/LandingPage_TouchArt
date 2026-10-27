@@ -63,7 +63,7 @@ Không bịa chứng chỉ, đánh giá, mức giá, địa chỉ, kênh liên h
 
 ### 4. Design system: Editorial Art + Boutique Wellness
 
-Chỉ đạo mới nhất: phong cách Editorial Art theo video người dùng cung cấp, nền kem chủ đạo, serif lớn, bố cục bất đối xứng, ảnh xếp lớp và animation nhẹ khi cuộn. Dùng xanh rêu cho điểm nhấn/booking/footer, champagne tiết chế. Không quay lại hero dark luxury toàn màn hình. Glassmorphism chỉ áp dụng ở header hoặc thanh CTA khi cần. Tạo cảm giác sang trọng, ấm, yên tĩnh và dễ sử dụng trên điện thoại.
+Chỉ đạo mới nhất: Slow Garden theo phản hồi người dùng. Không gian xanh nhiều cây, chiếc lá rơi chậm theo gió, ánh nắng dịu, cành lá đung đưa nhẹ. Tạo cảm giác người xem đang ở một khu vườn thư giãn. Không quay lại collage ảnh nghiêng hoặc animation phô trương. Giữ nội dung kinh doanh và luồng đặt lịch rõ ràng. Màu xanh lá/rêu và kem, chữ dễ đọc, khoảng thở rộng. Chuyển động CSS transform/opacity chậm; có nút tạm dừng, tự dừng khi tab ẩn và tôn trọng prefers-reduced-motion. Ảnh không gian thiên nhiên là minh họa, không trình bày như địa điểm thật của studio.
 
 Bộ token khởi điểm cho Touch Art (đề xuất, kiểm tra tương phản trước khi dùng):
 - --color-bg: #101A16

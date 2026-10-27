@@ -41,3 +41,13 @@ Không thu thập/lưu đăng ký, không gửi Google Sheets hoặc Telegram, k
 Trang chủ được làm lại theo video tham chiếu: nền kem, typography serif lớn, ảnh xếp lớp, bố cục nghiên nhẹ và animation khi cuộn. Có 14 trang nội dung nhập từ nguồn Việt/Anh: hai dịch vụ, địa điểm, cộng đồng, riêng tư và hai bài viết cho mỗi ngôn ngữ. Route /vi/, /en/ và /book; bản duyệt giữ noindex. Liên kết mỗi dịch vụ và bài viết mở trang chi tiết.
 
 Form có lựa chọn nhờ tư vấn, studio/khách sạn/nhờ tư vấn địa điểm, trường khu vực khách sạn, phụ phí đêm dự kiến không cộng dồn, giá tạm tính và tóm tắt. Tất cả vẫn chờ xác nhận, không đặt chỗ tự động. File docs/CLIENT_BRIEF.txt giữ bản yêu cầu đầy đủ từ website nguồn; các mục CMS/bot/lịch thật trong brief là phạm vi mở rộng chưa triển khai.
+
+## Slow Garden — hướng thiết kế hiện tại
+
+Theo phản hồi mới nhất, hero chuyển sang không gian xanh nhiều cây: ảnh rừng minh họa được lưu trong public/images/garden.jpg, lớp sương sáng, cành lá SVG, ánh nắng dịch chuyển chậm và lá rơi 29–39 giây theo gió. Không còn collage ảnh nghiêng ở hero. Các section dùng xanh dịu, khung ảnh mềm và chuyển động nhẹ.
+
+`src/components/GardenAtmosphere.tsx` chứa lá rơi, cành cây và nút dừng chuyển động. Animation dùng CSS, không thêm thư viện; tự tạm dừng khi tab ẩn và tôn trọng reduced-motion. Lớp trang trí không chặn thao tác. Ảnh rừng là hình minh họa không gian xanh, không phải ảnh xác minh địa điểm Touch Art. Nguồn: https://images.unsplash.com/photo-1441974231531-c6227db76b6e (asset photo-1441974231531-c6227db76b6e).
+
+## Nhạc nền thư giãn
+
+Nút “Bật nhạc thư giãn” tạo bản nhạc ambient nguyên bản bằng Web Audio API: hợp âm sine chậm, reverb mềm, fade-in/fade-out. Không dùng bản ghi hoặc file nhạc của bên thứ ba, không có request mạng để phát âm thanh. Nhạc mặc định tắt, chỉ chạy sau thao tác của người dùng; có nút tắt và thanh âm lượng, tự dừng khi tab bị ẩn. Không lưu sở thích hoặc tự phát lại khi mở trang. Mã tại src/components/AmbientMusic.tsx. Chất lượng nghe thực tế phụ thuộc thiết bị/loa; cần nghe thử bằng tai khi nghiệm thu âm thanh.

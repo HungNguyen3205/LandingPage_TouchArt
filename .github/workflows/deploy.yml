@@ -1,0 +1,42 @@
+name: Deploy Touch Art to Hosting via FTP
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧪 Run tests
+        run: npm test
+
+      - name: 🔨 Build production bundle
+        run: npm run build
+        env:
+          VITE_GOOGLE_SCRIPT_URL: ${{ secrets.VITE_GOOGLE_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbyoDAEiAwH-5ETu_mLZ5eKE-7zylalRLMzjlLifvdM7A-9NQk7EEe0Hop048AlJX1w0/exec' }}
+
+      - name: 🚀 Deploy to AZDIGI Hosting via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || 'touchart.com.vn/' }}
+          dangerous-clean-slate: false

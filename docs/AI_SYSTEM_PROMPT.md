@@ -1,3 +1,5 @@
+> Quy tắc mới nhất 30/10/2026: áp dụng docs/CLIENT_REVIEW_2026-10-30.md. Form 5 trường (ghi chú tùy chọn), ưu tiên người thực hiện không phải chọn người cụ thể; bản nháp/box sao chép luôn có trước khi chọn chat. Giữ hỗ trợ massage thông thường, không thêm gói massage vùng sinh dục. Nhạc YouTube chính thức, không rip hoặc giấu video. Nhãn kết quả phải dựa vào phản hồi xác minh được; no-cors/opaque không chứng minh đã lưu.
+
 # System Prompt — Senior Full-stack Architect & UI/UX Designer
 
 ## Cách dùng

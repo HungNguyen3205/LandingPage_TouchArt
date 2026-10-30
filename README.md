@@ -1,3 +1,5 @@
+> Cập nhật 30/10/2026: xem [báo cáo yêu cầu khách hàng](docs/CLIENT_REVIEW_2026-10-30.md). Form mới gồm họ tên, số điện thoại, gói dịch vụ, ưu tiên người thực hiện và ghi chú tùy chọn. Tạo nội dung trước khi chọn kênh chat; nhạc chuyển sang player YouTube theo tài liệu. Các mô tả 3 trường và nhạc tổng hợp bên dưới thuộc phiên bản trước.
+
 # Touch Art — Slow Garden
 
 Website React + TypeScript + Vite, Việt–Anh. Hướng giao diện hiện tại: khoảng 50% trắng ngà dịu, 50% xanh rêu, không gian cây xanh, lá rơi chậm và chuyển động nhẹ. Hero sáng–xanh; dịch vụ, booking, journal và footer xen kẽ các khu vực sáng.

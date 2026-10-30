@@ -3,21 +3,26 @@ import { ArrowUpRight, Copy, Check, CheckCircle2, Loader2, Sparkles } from 'luci
 import { services, config } from '../data/content';
 import type { Locale } from '../data/content';
 import { whatsappUrl } from '../lib/booking';
+import SocialLinks from './SocialLinks';
 import ServiceDropdown from './ServiceDropdown';
 
 export default function BookingForm({
   locale,
   serviceId,
-  onService
+  onService, initialDuration = '60'
 }: {
   locale: Locale;
   serviceId: string;
   onService: (id: string) => void;
+  initialDuration?: string;
 }) {
   const vi = locale === 'vi';
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [duration, setDuration] = useState('60');
+  const [duration, setDuration] = useState(initialDuration);
+  const [preference,setPreference]=useState('none');
+  const [note,setNote]=useState('');
+  useEffect(()=>{setDuration(initialDuration)},[initialDuration]);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [preview, setPreview] = useState('');
   const [copied, setCopied] = useState(false);
@@ -42,6 +47,7 @@ export default function BookingForm({
     setCopied(false);
     setCopyError(false);
     setSubmitError('');
+    setIsSubmitted(false);
   }
 
   function handleResetAll() {
@@ -81,6 +87,8 @@ export default function BookingForm({
       (vi ? 'Họ tên: ' : 'Name: ') + name.trim(),
       (vi ? 'Số điện thoại: ' : 'Phone: ') + phone.trim(),
       (vi ? 'Gói dịch vụ quan tâm: ' : 'Treatment of interest: ') + packageName,
+      (vi?'Ưu tiên người thực hiện: ':'Practitioner preference: ')+(preference==='female'?(vi?'Nữ':'Female'):preference==='male'?(vi?'Nam':'Male'):(vi?'Không yêu cầu':'No preference')),
+      ...(note.trim()?[(vi?'Ghi chú: ':'Note: ')+note.trim()]:[]),
       vi
         ? 'Đây là yêu cầu tư vấn, chưa phải lịch hẹn đã xác nhận.'
         : 'This is a consultation request, not a confirmed appointment.'
@@ -89,7 +97,10 @@ export default function BookingForm({
     setPreview(previewText);
     setCopied(false);
 
-    // Nếu đã cấu hình URL Google Apps Script Web App -> Gửi dữ liệu về Google Sheets & Telegram Bot
+  }
+
+  async function sendDirect(){
+    if(!preview||isSubmitting||isSubmitted)return;
     if (config.googleScriptUrl) {
       setIsSubmitting(true);
       setSubmitError('');
@@ -101,7 +112,8 @@ export default function BookingForm({
           packageName,
           duration: selectedDuration,
           locale,
-          note: 'Yêu cầu tư vấn gửi từ Touch Art Landing Page'
+          preference,
+          note: (vi?'Ưu tiên: ':'Preference: ')+preference+'\n'+note.trim()
         };
 
         // Google Apps Script Web App yêu cầu mode: 'no-cors' khi gọi từ client
@@ -115,6 +127,7 @@ export default function BookingForm({
         });
 
         setIsSubmitted(true);
+        setSubmitError(vi?'Đã thực hiện yêu cầu truyền dữ liệu. Kết nối này chưa cho phép xác minh máy chủ đã lưu hoặc Telegram đã nhận; lịch chưa được xác nhận.':'Transmission was attempted. This connection cannot verify storage or Telegram delivery; your appointment is not confirmed.');
       } catch (err) {
         console.error('Lỗi khi gửi yêu cầu tư vấn:', err);
         setSubmitError(
@@ -128,48 +141,6 @@ export default function BookingForm({
     }
   }
 
-  // Giao diện khi đã gửi thành công
-  if (isSubmitted) {
-    return (
-      <div className="booking-form compact-booking three-field-form booking-success-card" role="region" aria-live="polite">
-        <div className="success-icon-badge">
-          <CheckCircle2 size={38} className="success-check-icon" />
-        </div>
-        <h3 className="compact-title success-heading">
-          {vi ? 'Yêu cầu tư vấn đã được gửi!' : 'Your request has been received!'}
-        </h3>
-        <p className="form-hint success-hint">
-          {vi
-            ? `Cảm ơn bạn. Thông tin đã được chuyển đến đội ngũ Touch Art và Telegram. Chúng tôi sẽ liên hệ lại với bạn qua số điện thoại ${phone} trong thời gian sớm nhất.`
-            : `Thank you. Your request has been sent to the Touch Art team. We will be in touch with you shortly at ${phone}.`}
-        </p>
-
-        <div className="submitted-summary-box">
-          <div className="summary-row">
-            <span className="summary-label">{vi ? 'Họ tên:' : 'Full name:'}</span>
-            <strong className="summary-val">{name}</strong>
-          </div>
-          <div className="summary-row">
-            <span className="summary-label">{vi ? 'Số điện thoại:' : 'Phone:'}</span>
-            <strong className="summary-val">{phone}</strong>
-          </div>
-          <div className="summary-row">
-            <span className="summary-label">{vi ? 'Gói quan tâm:' : 'Treatment:'}</span>
-            <strong className="summary-val">{packageName}</strong>
-          </div>
-        </div>
-
-        <button
-          className="button dark full"
-          type="button"
-          onClick={handleResetAll}
-        >
-          {vi ? 'Gửi yêu cầu tư vấn khác' : 'Send another request'}
-        </button>
-      </div>
-    );
-  }
-
   return (
     <form className="booking-form compact-booking three-field-form" noValidate onSubmit={handleSubmit}>
       <div className="form-top">
@@ -177,7 +148,7 @@ export default function BookingForm({
         <span className="demo">
           {config.googleScriptUrl ? (
             <span className="live-indicator">
-              <Sparkles size={11} /> {vi ? 'KẾT NỐI TRỰC TIẾP' : 'CONNECTED'}
+              <Sparkles size={11} /> {vi ? 'YÊU CẦU TƯ VẤN' : 'CONSULTATION REQUEST'}
             </span>
           ) : (
             'DEMO'
@@ -186,7 +157,7 @@ export default function BookingForm({
       </div>
 
       <h3 className="compact-title">{vi ? 'Một khoảng nghỉ cho bạn.' : 'A moment just for you.'}</h3>
-      <p className="form-hint">{vi ? 'Để lại 3 thông tin để bắt đầu cuộc trò chuyện.' : 'Just three details to start the conversation.'}</p>
+      <p className="form-hint">{vi ? 'Xem lại lời nhắn trước khi chọn kênh liên hệ.' : 'Review your message before choosing a contact channel.'}</p>
 
       <div className="three-fields">
         <label htmlFor="booking-name">{vi ? 'Họ tên *' : 'Full name *'}</label>
@@ -250,6 +221,7 @@ export default function BookingForm({
         {errors.service && (
           <p className="error">{vi ? 'Vui lòng chọn gói dịch vụ.' : 'Please choose a treatment.'}</p>
         )}
+        <label htmlFor="booking-preference">{vi?'Ưu tiên người thực hiện':'Practitioner preference'}</label><select id="booking-preference" value={preference} onChange={e=>{setPreference(e.target.value);reset()}}><option value="none">{vi?'Không yêu cầu':'No preference'}</option><option value="female">{vi?'Nữ':'Female'}</option><option value="male">{vi?'Nam':'Male'}</option></select><small className="form-hint">{vi?'Đây là ưu tiên, chưa phải chọn người cụ thể. Hồ sơ được trao đổi riêng khi tư vấn.':'This is a preference, not a specific practitioner. Profiles are shared privately in consultation.'}</small><label htmlFor="booking-note">{vi?'Ghi chú (không bắt buộc)':'Note (optional)'}</label><textarea id="booking-note" rows={3} maxLength={1000} value={note} onChange={e=>{setNote(e.target.value);reset()}}/>
       </div>
 
       {submitError && <p className="error submit-error-banner">{submitError}</p>}
@@ -262,23 +234,15 @@ export default function BookingForm({
           </>
         ) : (
           <>
-            <span>{vi ? 'Gửi yêu cầu tư vấn' : 'Send consultation request'}</span>
+            <span>{vi ? 'Xem nội dung & chọn kênh chat' : 'Review message & choose chat'}</span>
             <ArrowUpRight size={18} />
           </>
         )}
       </button>
 
-      <p className="form-hint compact-demo">
-        {config.googleScriptUrl
-          ? vi
-            ? 'Thông tin sẽ được gửi an toàn về Google Sheets & Telegram Bot quản trị viên để hỗ trợ bạn sớm nhất.'
-            : 'Details will be securely transmitted to our Google Sheets & admin Telegram Bot to assist you promptly.'
-          : vi
-            ? 'Bản duyệt chuẩn bị sẵn nội dung. Sau khi kết nối Google Apps Script, thông tin sẽ tự động lưu về Google Sheets & Telegram Bot (-5408040804).'
-            : 'Preview ready. Once connected with Google Apps Script, details are automatically saved to Google Sheets & Telegram Bot (-5408040804).'}
-      </p>
+      <p className="form-hint compact-demo">{vi?'Tạo lời nhắn chưa gửi dữ liệu. Bạn chủ động chọn kênh để tiếp tục; lịch chỉ được chốt khi studio xác nhận.':'Preparing a message does not submit your data. Choose a channel to continue; appointments require studio confirmation.'}</p>
 
-      {preview && !config.googleScriptUrl && (
+      {preview && (
         <div className="summary" aria-live="polite">
           <h3>{vi ? 'Nội dung yêu cầu' : 'Your request'}</h3>
           <pre className="request-preview">{preview}</pre>
@@ -303,16 +267,8 @@ export default function BookingForm({
               {vi ? 'Chọn nội dung trên để sao chép thủ công.' : 'Select the text above to copy it manually.'}
             </p>
           )}
-          {whatsapp && (
-            <a className="button" href={whatsapp} target="_blank" rel="noopener noreferrer">
-              WhatsApp <ArrowUpRight size={16} />
-            </a>
-          )}
-          {config.zalo && (
-            <a className="button" href={config.zalo} target="_blank" rel="noopener noreferrer">
-              Zalo <ArrowUpRight size={16} />
-            </a>
-          )}
+          <SocialLinks locale={locale} message={preview}/>
+          {config.googleScriptUrl&&<button type="button" className="button dark full" disabled={isSubmitting||isSubmitted} onClick={()=>void sendDirect()}>{isSubmitting?(vi?'Đang truyền yêu cầu…':'Transmitting…'):isSubmitted?(vi?'Đã thử truyền · chưa xác minh':'Transmission attempted · unverified'):(vi?'Gửi qua hệ thống tư vấn':'Send via consultation system')}</button>}
         </div>
       )}
     </form>

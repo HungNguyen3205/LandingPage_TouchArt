@@ -21,7 +21,7 @@ Khi khách hàng gửi thông tin tư vấn trên website Touch Art (Họ tên, 
 1. Trong file mã vừa dán, Token và Chat ID đã được cấu hình sẵn chính xác:
    ```javascript
    // Bot: @trolyNotificationAI_bot
-   var TELEGRAM_BOT_TOKEN = "8700174286:AAGatWdVagYJSEUhrEmJfXef8JhqI8aCwOE";
+   var TELEGRAM_BOT_TOKEN = "SET_TELEGRAM_BOT_TOKEN_IN_SCRIPT_PROPERTIES";
    var TELEGRAM_CHAT_ID = "-5408040804";
    ```
 

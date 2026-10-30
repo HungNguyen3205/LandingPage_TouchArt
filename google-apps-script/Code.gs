@@ -8,7 +8,7 @@
 
 // Cấu hình Bot Telegram và Chat ID
 // Bot: @trolyNotificationAI_bot
-var TELEGRAM_BOT_TOKEN = PropertiesService.getScriptProperties().getProperty("TELEGRAM_BOT_TOKEN") || "8700174286:AAGatWdVagYJSEUhrEmJfXef8JhqI8aCwOE";
+var TELEGRAM_BOT_TOKEN = PropertiesService.getScriptProperties().getProperty("TELEGRAM_BOT_TOKEN") || "";
 var TELEGRAM_CHAT_ID = "-5408040804";
 
 /**
@@ -36,7 +36,8 @@ function doPost(e) {
     var packageName = sanitizeInput(data.packageName || data.service || "Chưa chọn gói");
     var duration = sanitizeInput(data.duration ? data.duration + " phút" : "—");
     var locale = (data.locale === "en") ? "Tiếng Anh (EN)" : "Tiếng Việt (VI)";
-    var note = sanitizeInput(data.note || "Yêu cầu tư vấn dịch vụ qua Website");
+    var note = sanitizeInput(String(data.note || "").slice(0, 1000));
+    var preference = ({male:"Nam",female:"Nữ",none:"Không yêu cầu"})[data.preference] || "Không yêu cầu";
 
     var now = new Date();
     var timeFormatted = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
@@ -47,7 +48,9 @@ function doPost(e) {
       timeFormatted,
       name,
       "'" + phone, // Giữ dạng text để không mất số 0 đầu và chống injection
-      packageName
+      packageName,
+      preference,
+      note
     ]);
 
     // 2. Gửi thông báo qua Telegram Bot
@@ -56,7 +59,7 @@ function doPost(e) {
 
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_BOT_TOKEN !== "THAY_TOKEN_BOT_CUA_BAN_VAO_DAY") {
       try {
-        telegramSent = sendTelegramMessage(name, phone, packageName, timeFormatted);
+        telegramSent = sendTelegramMessage(name, phone, packageName, timeFormatted, preference, note);
       } catch (tErr) {
         telegramError = tErr.toString();
         Logger.log("Telegram Error: " + telegramError);
@@ -106,7 +109,7 @@ function doGet(e) {
 /**
  * Gửi tin nhắn đến Telegram Bot
  */
-function sendTelegramMessage(name, phone, packageName, timeStr) {
+function sendTelegramMessage(name, phone, packageName, timeStr, preference, note) {
   var url = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage";
 
   var messageLines = [
@@ -115,6 +118,8 @@ function sendTelegramMessage(name, phone, packageName, timeStr) {
     "👤 <b>Họ tên:</b> " + escapeHtml(name),
     "📞 <b>Số điện thoại:</b> <code>" + escapeHtml(phone) + "</code>",
     "💆 <b>Gói dịch vụ:</b> " + escapeHtml(packageName),
+    "👥 <b>Ưu tiên:</b> " + escapeHtml(preference || "Không yêu cầu"),
+    "📝 <b>Ghi chú:</b> " + escapeHtml(note || "—"),
     "🕒 <b>Thời gian:</b> " + escapeHtml(timeStr),
     "━━━━━━━━━━━━━━━━━━━━━━"
   ];
@@ -136,7 +141,7 @@ function sendTelegramMessage(name, phone, packageName, timeStr) {
   var responseCode = response.getResponseCode();
   var responseText = response.getContentText();
 
-  Logger.log("Telegram response (" + responseCode + "): " + responseText);
+  Logger.log("Telegram response status: " + responseCode);
   return responseCode === 200;
 }
 
@@ -154,7 +159,9 @@ function getOrCreateSheet() {
       "Thời gian",
       "Họ tên",
       "Số điện thoại",
-      "Gói dịch vụ"
+      "Gói dịch vụ",
+      "Ưu tiên người thực hiện",
+      "Ghi chú"
     ];
     sheet.appendRow(headers);
 
@@ -174,6 +181,9 @@ function getOrCreateSheet() {
     sheet.setColumnWidth(4, 260); // Gói dịch vụ
   }
 
+  // Add headings only to empty new columns; preserve existing data and labels.
+  if (!sheet.getRange(1, 5).getValue()) sheet.getRange(1, 5).setValue("Ưu tiên người thực hiện");
+  if (!sheet.getRange(1, 6).getValue()) sheet.getRange(1, 6).setValue("Ghi chú");
   return sheet;
 }
 
@@ -216,4 +226,3 @@ function testSendTelegram() {
   );
   Logger.log("Kết quả gửi test Telegram: " + (result ? "THÀNH CÔNG" : "THẤT BẠI"));
 }
-

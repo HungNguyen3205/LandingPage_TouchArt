@@ -5,6 +5,7 @@ import type { Locale } from '../data/content';
 import { whatsappUrl } from '../lib/booking';
 import SocialLinks from './SocialLinks';
 import ServiceDropdown from './ServiceDropdown';
+import PreferenceDropdown from './PreferenceDropdown';
 
 export default function BookingForm({
   locale,
@@ -221,7 +222,19 @@ export default function BookingForm({
         {errors.service && (
           <p className="error">{vi ? 'Vui lòng chọn gói dịch vụ.' : 'Please choose a treatment.'}</p>
         )}
-        <label htmlFor="booking-preference">{vi?'Ưu tiên người thực hiện':'Practitioner preference'}</label><select id="booking-preference" value={preference} onChange={e=>{setPreference(e.target.value);reset()}}><option value="none">{vi?'Không yêu cầu':'No preference'}</option><option value="female">{vi?'Nữ':'Female'}</option><option value="male">{vi?'Nam':'Male'}</option></select><small className="form-hint">{vi?'Đây là ưu tiên, chưa phải chọn người cụ thể. Hồ sơ được trao đổi riêng khi tư vấn.':'This is a preference, not a specific practitioner. Profiles are shared privately in consultation.'}</small><label htmlFor="booking-note">{vi?'Ghi chú (không bắt buộc)':'Note (optional)'}</label><textarea id="booking-note" rows={3} maxLength={1000} value={note} onChange={e=>{setNote(e.target.value);reset()}}/>
+        <label htmlFor="booking-preference">{vi ? 'Ưu tiên người thực hiện' : 'Practitioner preference'}</label>
+        <PreferenceDropdown
+          id="booking-preference"
+          locale={locale}
+          value={preference}
+          onChange={val => {
+            setPreference(val);
+            reset();
+          }}
+        />
+        <small className="form-hint">{vi ? 'Đây là ưu tiên, chưa phải chọn người cụ thể. Hồ sơ được trao đổi riêng khi tư vấn.' : 'This is a preference, not a specific practitioner. Profiles are shared privately in consultation.'}</small>
+        <label htmlFor="booking-note">{vi ? 'Ghi chú (không bắt buộc)' : 'Note (optional)'}</label>
+        <textarea id="booking-note" rows={3} maxLength={1000} value={note} onChange={e => { setNote(e.target.value); reset(); }} />
       </div>
 
       {submitError && <p className="error submit-error-banner">{submitError}</p>}

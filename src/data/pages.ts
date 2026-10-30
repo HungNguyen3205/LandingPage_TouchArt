@@ -74,6 +74,72 @@ export const pages:Record<string,PageContent>={
       }
     ]
   },
+  "/vi/services/linga-yoni/": {
+    "title": "Linga & Yoni Ritual — Massage Linga & Yoni",
+    "body": [
+      {
+        "kind": "p",
+        "text": "Khơi nguồn năng lượng gốc. Chạm vào linh thiêng. Khoảng không gian riêng tư dành cho cả Nam và Nữ, nơi năng lượng cơ thể được xoa dịu và trân trọng đúng nghĩa theo triết lý Tantra cổ xưa."
+      },
+      {
+        "kind": "p",
+        "text": "Qua những nhịp chạm tinh tế, an toàn và hoàn toàn bình đẳng, gói trị liệu giúp bạn giải tỏa stress, khơi dậy sinh lực và kết nối sâu sắc với chính cơ thể mình."
+      },
+      {
+        "kind": "h2",
+        "text": "Thời lượng & Giá"
+      },
+      {
+        "kind": "p",
+        "text": "60 phút · 1.000.000 ₫"
+      },
+      {
+        "kind": "p",
+        "text": "90 phút · 1.200.000 ₫"
+      },
+      {
+        "kind": "h2",
+        "text": "Lưu ý trải nghiệm"
+      },
+      {
+        "kind": "p",
+        "text": "Tùy chọn Kỹ thuật viên Nam hoặc Nữ theo nhu cầu của bạn. Khuyến khích đặt lịch trước để trải nghiệm của bạn được chuẩn bị chu đáo nhất."
+      }
+    ]
+  },
+  "/vi/services/private-combo/": {
+    "title": "Private Combo · Trải Nghiệm Riêng Tư Trọn Gói",
+    "body": [
+      {
+        "kind": "p",
+        "text": "Hành trình chăm sóc cao cấp đưa bạn vào chiều sâu của sự thư giãn, kết hợp giữa nuôi dưỡng thể chất và khơi nguồn năng lượng Tantra nguyên bản trong không gian hoàn toàn biệt lập."
+      },
+      {
+        "kind": "h2",
+        "text": "Các bước trải nghiệm"
+      },
+      {
+        "kind": "p",
+        "text": "• Chăm sóc da: Tẩy da chết toàn thân & Massage, đắp mặt nạ dưỡng da mặt."
+      },
+      {
+        "kind": "p",
+        "text": "• Nuôi dưỡng cơ thể: Massage toàn thân kết hợp nghi thức Linga/Yoni Ritual giúp giải tỏa stress và phục hồi sinh lực."
+      },
+      {
+        "kind": "h2",
+        "text": "Thời lượng & Giá"
+      },
+      {
+        "kind": "p",
+        "text": "75 phút · 1.300.000 ₫"
+      },
+      {
+        "kind": "p",
+        "text": "90 phút · 1.500.000 ₫"
+      }
+    ]
+  },
   "/vi/locations/an-thuong/": {
     "title": "Ghé Touch Art tại An Thượng",
     "body": [
@@ -262,6 +328,72 @@ export const pages:Record<string,PageContent>={
       {
         "kind": "p",
         "text": "Prices follow the supplied menu and await launch approval."
+      }
+    ]
+  },
+  "/en/services/linga-yoni/": {
+    "title": "Linga & Yoni Ritual",
+    "body": [
+      {
+        "kind": "p",
+        "text": "Awaken your primal energy. Touch the sacred. A private space for both Men and Women, where body energy is soothed and truly honored according to ancient Tantra philosophy."
+      },
+      {
+        "kind": "p",
+        "text": "Through delicate, safe, and balanced touches, this therapy helps release stress, revive vitality, and deeply reconnect with your inner self."
+      },
+      {
+        "kind": "h2",
+        "text": "Duration & Pricing"
+      },
+      {
+        "kind": "p",
+        "text": "60 minutes · 1,000,000 VND"
+      },
+      {
+        "kind": "p",
+        "text": "90 minutes · 1,200,000 VND"
+      },
+      {
+        "kind": "h2",
+        "text": "Experience notes"
+      },
+      {
+        "kind": "p",
+        "text": "Choose your preferred Male or Female Therapist. Advance reservation is highly recommended for the best preparation."
+      }
+    ]
+  },
+  "/en/services/private-combo/": {
+    "title": "Private Combo Experience",
+    "body": [
+      {
+        "kind": "p",
+        "text": "A premium wellness journey designed to deeply relax your body and mind, combining physical nourishment with authentic Tantra energy in a completely private space."
+      },
+      {
+        "kind": "h2",
+        "text": "Journey steps"
+      },
+      {
+        "kind": "p",
+        "text": "• Skincare: Full body exfoliation, facial massage & nourishing mask."
+      },
+      {
+        "kind": "p",
+        "text": "• Bodywork: Full-body massage integrated with a Linga/Yoni Ritual to release stress and restore vitality."
+      },
+      {
+        "kind": "h2",
+        "text": "Duration & Pricing"
+      },
+      {
+        "kind": "p",
+        "text": "75 minutes · 1,300,000 VND"
+      },
+      {
+        "kind": "p",
+        "text": "90 minutes · 1,500,000 VND"
       }
     ]
   },

@@ -105,11 +105,11 @@
 /* Responsive adjustments for Mobile/Tablet matching sample precisely */
 @media (max-width: 1024px) {
   .garden-hero {
-    height: 100svh !important;
-    min-height: 720px !important;
-    max-height: 920px !important;
+    height: auto !important;
+    min-height: 980px !important;
     position: relative !important;
     overflow: hidden !important;
+    padding-bottom: 20px !important;
   }
   .garden-hero .garden-landscape {
     position: absolute !important;
@@ -123,16 +123,19 @@
     overflow: hidden !important;
     z-index: 1 !important;
   }
-  /* Show 2 people on massage table at the bottom corner and hammock in center */
+  /* Position 2 people on massage table BELOW Khám phá dịch vụ and touching bottom green area */
   .garden-landscape > img {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 132% !important;
+    height: 100% !important;
     object-fit: cover !important;
-    object-position: center top !important;
+    object-position: 72% center !important;
+    transform: translateY(220px) !important;
     filter: saturate(1.1) contrast(1.1) brightness(0.96) !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 6%, black 16%, black 100%) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 6%, black 16%, black 100%) !important;
   }
 
   .garden-hero .hero-content {

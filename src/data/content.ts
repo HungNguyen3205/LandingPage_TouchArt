@@ -19,7 +19,7 @@ export const config = {
     kakao: '/images/qr-kakao.png'
   },
   community: 'https://touchart.vn/community',
-  googleScriptUrl: envGoogleScriptUrl || 'https://script.google.com/macros/s/AKfycbyoDAEiAwH-5ETu_mLZ5eKE-7zylalRLMzjlLifvdM7A-9NQk7EEe0Hop048AlJX1w0/exec'
+  googleScriptUrl: envGoogleScriptUrl || 'https://script.google.com/macros/s/AKfycbysRKopb6qsvQX_OKc-T9Tqa2qyvwdjEhM08WyVsfc-kUTCSROwSJt20CLpyejTKEu5/exec'
 };
 
 export const images = {

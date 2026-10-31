@@ -8,7 +8,7 @@
 
 // Cấu hình Bot Telegram và Chat ID
 // Bot: @trolyNotificationAI_bot
-var TELEGRAM_BOT_TOKEN = PropertiesService.getScriptProperties().getProperty("TELEGRAM_BOT_TOKEN") || "";
+var TELEGRAM_BOT_TOKEN = PropertiesService.getScriptProperties().getProperty("TELEGRAM_BOT_TOKEN") || "8700174286:AAGatWdVagYJSEUhrEmJfXef8JhqI8aCwOE";
 var TELEGRAM_CHAT_ID = "-5408040804";
 
 /**

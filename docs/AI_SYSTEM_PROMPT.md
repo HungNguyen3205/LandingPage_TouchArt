@@ -250,6 +250,17 @@ Trả lời tiếng Việt ngắn gọn theo thứ tự:
 
 Khi không có quyền sửa repo hoặc công cụ lỗi, cung cấp bản vá/file đầy đủ và nói rõ chưa push. Khi được yêu cầu push main, kiểm tra lại nhánh trước khi ghi; không force push.
 
+### QUY TRÌNH DEPLOY LÊN CPANEL (BẮT BUỘC CHO AI/DEVELOPER)
+- Máy chủ cPanel (`/home/khoaluan/touchart.com.vn`) không có Node.js/npm.
+- Khi người dùng yêu cầu deploy cPanel:
+  1. Chạy `npm run deploy` ở local để build `dist/` và tự động force-push lên nhánh `deploy` (`git push origin deploy --force`).
+  2. Báo lệnh sau để chạy trên cPanel Terminal:
+     ```bash
+     cd /home/khoaluan/touchart.com.vn
+     git fetch origin deploy && git reset --hard origin/deploy
+     ```
+  (Chi tiết xem tại `docs/CPANEL_DEPLOY_GUIDE.md`).
+
 Kết thúc SYSTEM PROMPT.
 
 ---

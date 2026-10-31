@@ -16,6 +16,24 @@ npm run preview
 
 Node 22.6+; khuyến nghị Node 24. Deploy `dist` lên static hosting; đã có rewrite Vercel/Netlify. Trong môi trường hạn chế network interfaces dùng `npx vite --host 127.0.0.1`.
 
+## Quy trình Deploy lên cPanel (Dành cho AI & Developer)
+> Chi tiết xem tại: [`docs/CPANEL_DEPLOY_GUIDE.md`](docs/CPANEL_DEPLOY_GUIDE.md)
+
+1. **Bước 1 (Tại máy Local)**: Build và đẩy mã nguồn đã compile sang nhánh `deploy`:
+   ```bash
+   git add .
+   git commit -m "feat/fix: mô tả thay đổi"
+   git push origin main
+   npm run deploy
+   ```
+2. **Bước 2 (Tại cPanel Terminal)**:
+   ```bash
+   cd /home/khoaluan/touchart.com.vn
+   git fetch origin deploy && git reset --hard origin/deploy
+   ```
+   *(Hoặc `git fetch danava deploy && git reset --hard danava/deploy` nếu dùng remote danava)*.
+
+
 ## Nội dung và cấu trúc
 
 - `src/data/content.ts`: dịch vụ, giá, Việt–Anh, ảnh và kênh liên hệ.

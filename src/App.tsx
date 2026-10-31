@@ -257,6 +257,7 @@ export default function App(){
             </div>
           </div>
           <div className="approach-copy treatment-notes">
+            <span className="chapter-number">01</span>
             <span className="eyebrow">NOTES · {vi?'LƯU Ý':'NOTES'}</span>
             <h2>{vi?'Chăm sóc bắt đầu từ lắng nghe.':'Care begins with listening.'}</h2>
             <ul>

@@ -53,14 +53,10 @@ function ServiceCardItem({
           style={{ cursor: 'pointer' }}
           title={vi ? 'Nhấn để phóng to ảnh' : 'Click to enlarge image'}
         />
-        <span>0{i + 1}</span>
+        <span className="service-order-num">0{i + 1}</span>
 
         {gallery.length > 1 && (
           <>
-            <span className="gallery-counter">
-              {activeImgIndex + 1} / {gallery.length}
-            </span>
-
             {/* Seamless Left / Right Carousel Controls */}
             <button
               type="button"
@@ -78,22 +74,6 @@ function ServiceCardItem({
             >
               <ChevronRight size={18} />
             </button>
-
-            {/* Non-intrusive slim bar indicators */}
-            <div className="service-gallery-indicators" aria-label="Gallery indicator">
-              {gallery.map((img: string, gIdx: number) => (
-                <button
-                  key={img}
-                  type="button"
-                  className={`gallery-bar ${gIdx === activeImgIndex ? 'active' : ''}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveImgIndex(gIdx);
-                  }}
-                  aria-label={`Photo ${gIdx + 1}`}
-                />
-              ))}
-            </div>
           </>
         )}
       </div>
@@ -235,22 +215,21 @@ export default function App(){
           <GardenBranch className="branch-top"/>
           <GardenBranch className="branch-bottom"/>
           <div className="hero-content wrap">
-            <span className="eyebrow">MASSAGE & BODYWORK · CHĂM SÓC RIÊNG TƯ</span>
+            <span className="eyebrow">{vi ? 'MASSAGE & BODYWORK · CHĂM SÓC RIÊNG TƯ' : 'MASSAGE & BODYWORK · PRIVATE CARE'}</span>
             <h1>{t.hero.split('\n').map((line,i)=><span key={line} className={i===1?'italic':''}>{line}</span>)}</h1>
-            <p>{vi?'Dành riêng cho bạn một khoảng thở thật. Chậm nhịp cuộc sống bên ngoài, nhận ra cảm nhận cơ thể và trở về trong khoảnh khắc này.':'A little breathing space just for you. Slow the outside world, listen to your body and return to this moment.'}</p>
+            <p>
+              {vi
+                ? 'Dành riêng cho bạn một khoảng thư thái. Chia sẻ nhu cầu qua biểu mẫu, nhắn tin chọn nhà trị liệu yêu thích và đặt hẹn theo cách của bạn.'
+                : 'A peaceful pause just for you. Share your preferences through the form, connect privately to choose your therapist, and book on your own terms.'}
+            </p>
             <div className="garden-hero-actions">
-              <a className="button champagne" href="#booking">
-                {vi?'Chia sẻ nhu cầu & đặt lịch':'Share your preferences & book'}
+              <a className="button forest-primary" href="#booking">
+                {vi ? 'Chia sẻ nhu cầu & đặt lịch' : 'Share your preferences & book'}
                 <ArrowUpRight size={18}/>
               </a>
               
               <a className="hero-explore" href="#treatments">{t.explore} ↓</a>
             </div>
-          </div>
-          <div className="garden-whisper">
-            <span className="breathing-dot"/>
-            <span>{vi?'Hít vào nhẹ. Thở ra chậm.':'Breathe in gently. Breathe out slowly.'}</span>
-            <small>{vi?'Một chút tĩnh lặng, dành riêng cho bạn.':'A little stillness, just for you.'}</small>
           </div>
           <div className="hero-bottom wrap">
             
@@ -331,7 +310,7 @@ export default function App(){
               </p>
             </div>
 
-            <div className="filter-chips">
+            <div className="filters filter-chips">
               {[
                 ['all',t.all],
                 ['relax',t.relax],
@@ -341,6 +320,7 @@ export default function App(){
               ].map(([id,name])=>(
                 <button 
                   key={id} 
+                  type="button"
                   aria-pressed={filter===id} 
                   className={filter===id?'active':''} 
                   onClick={()=>setFilter(id)}

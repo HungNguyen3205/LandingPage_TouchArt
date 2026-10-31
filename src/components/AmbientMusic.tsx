@@ -1,4 +1,104 @@
-import {useState} from 'react';
-import {Music2,X,ExternalLink} from 'lucide-react';
-import type {Locale} from '../data/content';
-export default function AmbientMusic({locale}:{locale:Locale}){const [open,setOpen]=useState(false);const vi=locale==='vi';return <aside className="youtube-music ambient-player">{open&&<div className="youtube-panel"><div className="youtube-heading"><span>Marconi Union · Weightless</span><button type="button" aria-label={vi?'Đóng và dừng nhạc':'Close and stop music'} onClick={()=>setOpen(false)}><X size={18}/></button></div><iframe width="320" height="200" src="https://www.youtube-nocookie.com/embed/UfcAVejslrU?autoplay=1&loop=1&playlist=UfcAVejslrU&playsinline=1" title="Marconi Union — Weightless (YouTube)" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen referrerPolicy="strict-origin-when-cross-origin"/><p>{vi?'Nếu video không phát được trong trang, mở trực tiếp trên YouTube.':'If embedded playback is unavailable, open YouTube directly.'}</p><a href="https://www.youtube.com/watch?v=UfcAVejslrU" target="_blank" rel="noopener noreferrer">YouTube <ExternalLink size={13}/></a></div>}<div className="ambient-player-main"><button type="button" aria-expanded={open} onClick={()=>setOpen(!open)}><Music2 size={17}/>{open?(vi?'Đóng nhạc thư giãn':'Close relaxing music'):(vi?'Nhạc thư giãn · Weightless':'Relaxing music · Weightless')}</button></div></aside>}
+import { useState, useEffect, useRef } from 'react';
+import { Music2 } from 'lucide-react';
+import type { Locale } from '../data/content';
+
+export default function AmbientMusic({ locale }: { locale: Locale }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const explicitlyPausedRef = useRef(false);
+  const vi = locale === 'vi';
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.55;
+
+    // Attempt autoplay immediately
+    const startPromise = audio.play();
+    if (startPromise !== undefined) {
+      startPromise
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {
+          // Browser prevented unmuted autoplay before user gesture.
+          // Listen for the first touch or click anywhere on the page to automatically start.
+          setIsPlaying(false);
+
+          const handleFirstGesture = () => {
+            if (audioRef.current && !explicitlyPausedRef.current) {
+              audioRef.current.play().then(() => {
+                setIsPlaying(true);
+              }).catch(() => {});
+            }
+            window.removeEventListener('pointerdown', handleFirstGesture);
+            window.removeEventListener('touchstart', handleFirstGesture);
+            window.removeEventListener('click', handleFirstGesture);
+            window.removeEventListener('keydown', handleFirstGesture);
+          };
+
+          window.addEventListener('pointerdown', handleFirstGesture, { once: true, passive: true });
+          window.addEventListener('touchstart', handleFirstGesture, { once: true, passive: true });
+          window.addEventListener('click', handleFirstGesture, { once: true, passive: true });
+          window.addEventListener('keydown', handleFirstGesture, { once: true, passive: true });
+        });
+    }
+  }, []);
+
+  const toggleAudio = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+      explicitlyPausedRef.current = true;
+    } else {
+      audio.play().then(() => {
+        setIsPlaying(true);
+        explicitlyPausedRef.current = false;
+      }).catch(() => {});
+    }
+  };
+
+  return (
+    <aside className="ambient-player" aria-label={vi ? 'Nhạc nền thư giãn' : 'Ambient background music'}>
+      <div className="ambient-player-main">
+        <button
+          type="button"
+          onClick={toggleAudio}
+          aria-label={
+            isPlaying
+              ? vi ? 'Tạm dừng nhạc thư giãn' : 'Pause relaxing music'
+              : vi ? 'Bật nhạc thư giãn' : 'Play relaxing music'
+          }
+        >
+          {isPlaying ? (
+            <>
+              <div className="music-waves" aria-hidden="true">
+                <i />
+                <i />
+                <i />
+              </div>
+              <span>{vi ? 'Nhạc thư giãn · Đang phát' : 'Relaxing music · Playing'}</span>
+            </>
+          ) : (
+            <>
+              <Music2 size={16} aria-hidden="true" />
+              <span>{vi ? 'Bật nhạc thư giãn' : 'Play relaxing music'}</span>
+            </>
+          )}
+        </button>
+      </div>
+      <audio
+        ref={audioRef}
+        src="/audio/touch-art-ambient.mp3"
+        loop
+        preload="auto"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+    </aside>
+  );
+}

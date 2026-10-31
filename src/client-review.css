@@ -95,23 +95,33 @@
   animation: none !important; /* Stop continuous scaling blur on high-DPI screens */
 }
 
-/* Desktop Mist: Wrap text column softly on left, leave head, body and massage table 100% uncovered */
+/* Desktop Mist: Ultra-smooth feathered transition with progressive optical blur for seamless blend */
 .garden-hero .garden-mist {
   position: absolute !important;
   inset: 0 !important;
   background: 
     linear-gradient(90deg, 
       #f4f3ec 0%, 
-      #f4f3ec 28%, 
-      rgba(244, 243, 236, 0.85) 38%, 
-      rgba(244, 243, 236, 0.3) 46%, 
-      transparent 52%
+      #f4f3ec 20%, 
+      rgba(244, 243, 236, 0.98) 20%, 
+      rgba(244, 243, 236, 0.90) 34%, 
+      rgba(244, 243, 236, 0.78) 40%, 
+      rgba(244, 243, 236, 0.60) 46%, 
+      rgba(244, 243, 236, 0.40) 52%, 
+      rgba(244, 243, 236, 0.22) 58%, 
+      rgba(244, 243, 236, 0.08) 64%, 
+      rgba(244, 243, 236, 0.02) 80%, 
+      transparent 76%
     ),
     linear-gradient(0deg, 
       #f4f3ec 0%, 
-      rgba(244, 243, 236, 0.5) 15%, 
-      transparent 28%
+      rgba(244, 243, 236, 0.5) 12%, 
+      transparent 24%
     ) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  -webkit-mask-image: linear-gradient(90deg, black 0%, black 28%, rgba(0,0,0,0.85) 38%, rgba(0,0,0,0.45) 48%, rgba(0,0,0,0.12) 58%, transparent 66%) !important;
+  mask-image: linear-gradient(90deg, black 0%, black 28%, rgba(0,0,0,0.85) 38%, rgba(0,0,0,0.45) 48%, rgba(0,0,0,0.12) 58%, transparent 66%) !important;
   pointer-events: none !important;
   z-index: 2 !important;
 }
@@ -1705,6 +1715,124 @@ select option {
 @media (max-width: 600px) {
   .social-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Làm mềm lớp sương trên mobile/tablet, bỏ đường cắt ngang */
+@media (max-width: 1024px) {
+  .garden-hero .garden-mist {
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+
+    /* Bỏ mask và blur desktop còn áp dụng trên mobile */
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+
+    /* Chuyển màu liên tục trên toàn hero */
+    background: linear-gradient(
+      180deg,
+      rgba(244, 243, 236, 1)    0%,
+      rgba(244, 243, 236, 0.99) 16%,
+      rgba(244, 243, 236, 0.96) 27%,
+      rgba(244, 243, 236, 0.88) 37%,
+      rgba(244, 243, 236, 0.73) 46%,
+      rgba(244, 243, 236, 0.53) 55%,
+      rgba(244, 243, 236, 0.33) 64%,
+      rgba(244, 243, 236, 0.16) 73%,
+      rgba(244, 243, 236, 0.05) 82%,
+      rgba(244, 243, 236, 0)   92%
+    ) !important;
+
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+}
+
+/* DESKTOP: nền kem ôm nội dung, cong mềm ở góc trái dưới */
+@media (min-width: 1025px) {
+  .garden-hero .garden-mist {
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+
+    background: radial-gradient(
+      ellipse 85% 120% at 0% 0%,
+      rgba(244, 243, 236, 1)    0%,
+      rgba(244, 243, 236, 1)   42%,
+      rgba(244, 243, 236, .97) 50%,
+      rgba(244, 243, 236, .85) 58%,
+      rgba(244, 243, 236, .62) 66%,
+      rgba(244, 243, 236, .34) 74%,
+      rgba(244, 243, 236, .12) 83%,
+      rgba(244, 243, 236, 0)  95%
+    ) !important;
+
+    pointer-events: none !important;
+  }
+}
+
+/* MOBILE: nền kem lượn xuống bên trái như hình mẫu */
+@media (max-width: 1024px) {
+  .garden-hero .garden-mist {
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+
+    background:
+      linear-gradient(
+        180deg,
+        #f4f3ec 0%,
+        rgba(244, 243, 236, .96) 14%,
+        rgba(244, 243, 236, .65) 25%,
+        rgba(244, 243, 236, 0) 43%
+      ),
+      radial-gradient(
+        ellipse 115% 78% at 0% 0%,
+        #f4f3ec 0%,
+        #f4f3ec 42%,
+        rgba(244, 243, 236, .96) 52%,
+        rgba(244, 243, 236, .80) 62%,
+        rgba(244, 243, 236, .50) 73%,
+        rgba(244, 243, 236, .20) 85%,
+        rgba(244, 243, 236, 0) 100%
+      ) !important;
+
+    pointer-events: none !important;
+  }
+}
+
+/* DESKTOP: bỏ mép cắt dọc, giữ lớp sương cong mềm */
+@media (min-width: 1025px) {
+  .garden-hero .garden-landscape {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .garden-hero .garden-landscape > img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: right center !important;
+    transform: none !important;
+
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
 }
 

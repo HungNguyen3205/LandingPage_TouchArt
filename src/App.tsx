@@ -208,7 +208,7 @@ export default function App(){
         {/* HERO SECTION */}
         <section className="hero garden-hero" id="home">
           <div className="garden-landscape" aria-hidden="true">
-            <img src="/images/hero-client.jpg" alt="Touch Art Wellness" fetchPriority="high"/>
+            <img src="/images/trang_chu.jpg" alt="Touch Art Wellness" fetchPriority="high"/>
             <div className="garden-mist"/>
             <div className="garden-sunlight"/>
           </div>

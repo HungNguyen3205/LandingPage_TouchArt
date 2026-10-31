@@ -23,7 +23,7 @@ export const config = {
 };
 
 export const images = {
-  hero: '/images/hero-client.jpg',
+  hero: '/images/trang_chu.jpg',
   detail: '/images/body-client-1.jpg',
   room: '/images/linga-yoni-2.jpg',
   ritual: '/images/four-hands-client.jpg',

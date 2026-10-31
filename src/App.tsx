@@ -567,7 +567,7 @@ export default function App(){
         </div>
       </footer>
 
-      <a className="mobile-cta" href="#booking">{t.book}<ArrowUpRight size={18}/></a>
+      <a className={scrolled ? 'mobile-cta is-visible' : 'mobile-cta'} href="#booking">{t.book}<ArrowUpRight size={18}/></a>
 
       {/* LIGHTBOX DIALOG */}
       <dialog 

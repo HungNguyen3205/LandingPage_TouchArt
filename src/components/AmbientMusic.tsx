@@ -64,10 +64,6 @@ export default function AmbientMusic({ locale }: { locale: Locale }) {
 
   return (
     <aside className="ambient-player" aria-label={vi ? 'Nhạc thư giãn Touch Art' : 'Touch Art ambient sound'}>
-      <div className="ambient-deck-quote" aria-hidden="true">
-        <em>{vi ? 'Lắng nghe cơ thể.' : 'Listen to your body.'}</em>
-        <span>{vi ? 'Chăm sóc theo cách của bạn.' : 'Care tailored to you.'}</span>
-      </div>
       <div className="ambient-player-main">
         <button
           type="button"

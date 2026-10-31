@@ -88,14 +88,14 @@ export default function BookingForm({
 
     const formattedMessage = [
       vi ? '🌿 [TOUCH ART] — YÊU CẦU TƯ VẤN & ĐẶT HẸN' : '🌿 [TOUCH ART] — CONSULTATION REQUEST',
-      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      '────────────────',
       (vi ? '👤 Họ tên: ' : '👤 Name: ') + name.trim(),
       (vi ? '📞 Điện thoại / Zalo: ' : '📞 Phone: ') + phone.trim(),
       (vi ? '💆 Gói dịch vụ: ' : '💆 Treatment: ') + packageName,
       (vi ? '👥 Ưu tiên KTV: ' : '👥 Preference: ') + prefLabel,
-      ...(note.trim() ? [(vi ? '📝 Ghi chú riêng: ' : '📝 Note: ') + note.trim()] : []),
+      ...(note.trim() ? [(vi ? '📝 Ghi chú: ' : '📝 Note: ') + note.trim()] : []),
       (vi ? '⏰ Thời gian gửi: ' : '⏰ Sent at: ') + timeStr,
-      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      '────────────────',
       vi
         ? '✨ Kính nhờ Touch Art kiểm tra và phản hồi hỗ trợ em sớm nhất nhé!'
         : '✨ Thank you! Looking forward to your prompt confirmation.'

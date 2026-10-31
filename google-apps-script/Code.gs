@@ -112,29 +112,23 @@ function doGet(e) {
 function sendTelegramMessage(name, phone, packageName, timeStr, preference, note, fullMessage) {
   var url = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage";
 
-  var messageText = "";
-  if (fullMessage && typeof fullMessage === "string" && fullMessage.trim().length > 10) {
-    messageText = fullMessage;
-  } else {
-    var messageLines = [
-      "🌿 <b>[TOUCH ART] CÓ YÊU CẦU TƯ VẤN MỚI</b>",
-      "━━━━━━━━━━━━━━━━━━━━━━",
-      "👤 <b>Họ tên:</b> " + escapeHtml(name),
-      "📞 <b>Số điện thoại:</b> <code>" + escapeHtml(phone) + "</code>",
-      "💆 <b>Gói dịch vụ:</b> " + escapeHtml(packageName),
-      "👥 <b>Ưu tiên KTV:</b> " + escapeHtml(preference || "Không yêu cầu"),
-      "📝 <b>Ghi chú riêng:</b> " + escapeHtml(note || "—"),
-      "🕒 <b>Thời gian:</b> " + escapeHtml(timeStr),
-      "━━━━━━━━━━━━━━━━━━━━━━",
-      "✨ <i>Khách hàng đang chờ phản hồi từ Touch Art.</i>"
-    ];
-    messageText = messageLines.join("\n");
-  }
+  var messageLines = [
+    "🌿 <b>[TOUCH ART] CÓ YÊU CẦU TƯ VẤN MỚI</b>",
+    "────────────────",
+    "👤 <b>Họ tên:</b> " + escapeHtml(name),
+    "📞 <b>Số điện thoại:</b> <code>" + escapeHtml(phone) + "</code>",
+    "💆 <b>Gói dịch vụ:</b> " + escapeHtml(packageName),
+    "👥 <b>Ưu tiên KTV:</b> " + escapeHtml(preference || "Không yêu cầu"),
+    "📝 <b>Ghi chú:</b> " + escapeHtml(note || "—"),
+    "🕒 <b>Thời gian:</b> " + escapeHtml(timeStr),
+    "────────────────",
+    "✨ <i>Khách hàng đang chờ phản hồi từ Touch Art.</i>"
+  ];
 
   var payload = {
     chat_id: TELEGRAM_CHAT_ID,
-    text: messageText,
-    parse_mode: fullMessage ? "" : "HTML"
+    text: messageLines.join("\n"),
+    parse_mode: "HTML"
   };
 
   var options = {

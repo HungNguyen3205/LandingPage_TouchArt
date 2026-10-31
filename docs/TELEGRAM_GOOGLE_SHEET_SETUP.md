@@ -71,10 +71,13 @@ VITE_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/AKfycbx.../exec
    - Nhóm Telegram (`-5408040804`) nhận được tin nhắn thông báo tức thì:
      ```
      🌿 [TOUCH ART] CÓ YÊU CẦU TƯ VẤN MỚI
-     ━━━━━━━━━━━━━━━━━━━━━━
+     ────────────────
      👤 Họ tên: Nguyễn Văn A
      📞 Số điện thoại: 0901234567
      💆 Gói dịch vụ: Body Massage · 60 phút
-     🕒 Thời gian: 27/10/2026 23:45:00
-     ━━━━━━━━━━━━━━━━━━━━━━
+     👥 Ưu tiên KTV: Nữ
+     📝 Ghi chú: Cần phòng riêng yên tĩnh
+     🕒 Thời gian: 31/10/2026 15:00:00
+     ────────────────
+     ✨ Khách hàng đang chờ phản hồi từ Touch Art.
      ```

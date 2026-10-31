@@ -37,12 +37,12 @@ function doPost(e) {
     var duration = sanitizeInput(data.duration ? data.duration + " phút" : "—");
     var locale = (data.locale === "en") ? "Tiếng Anh (EN)" : "Tiếng Việt (VI)";
     var note = sanitizeInput(String(data.note || "").slice(0, 1000));
-    var preference = ({male:"Nam",female:"Nữ",none:"Không yêu cầu"})[data.preference] || "Không yêu cầu";
+    var preference = ({male:"Nam",female:"Nữ",none:"Không yêu cầu"})[data.preference] || data.preference || "Không yêu cầu";
 
     var now = new Date();
     var timeFormatted = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
 
-    // 1. Ghi dữ liệu vào Google Sheet (tối giản 4 cột thiết yếu nhất)
+    // 1. Ghi dữ liệu vào Google Sheet (đầy đủ các cột)
     var sheet = getOrCreateSheet();
     sheet.appendRow([
       timeFormatted,
@@ -50,7 +50,7 @@ function doPost(e) {
       "'" + phone, // Giữ dạng text để không mất số 0 đầu và chống injection
       packageName,
       preference,
-      note
+      note || "—"
     ]);
 
     // 2. Gửi thông báo qua Telegram Bot
@@ -59,7 +59,7 @@ function doPost(e) {
 
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_BOT_TOKEN !== "THAY_TOKEN_BOT_CUA_BAN_VAO_DAY") {
       try {
-        telegramSent = sendTelegramMessage(name, phone, packageName, timeFormatted, preference, note);
+        telegramSent = sendTelegramMessage(name, phone, packageName, timeFormatted, preference, note, data.fullMessage);
       } catch (tErr) {
         telegramError = tErr.toString();
         Logger.log("Telegram Error: " + telegramError);
@@ -109,25 +109,32 @@ function doGet(e) {
 /**
  * Gửi tin nhắn đến Telegram Bot
  */
-function sendTelegramMessage(name, phone, packageName, timeStr, preference, note) {
+function sendTelegramMessage(name, phone, packageName, timeStr, preference, note, fullMessage) {
   var url = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage";
 
-  var messageLines = [
-    "🌿 <b>[TOUCH ART] CÓ YÊU CẦU TƯ VẤN MỚI</b>",
-    "━━━━━━━━━━━━━━━━━━━━━━",
-    "👤 <b>Họ tên:</b> " + escapeHtml(name),
-    "📞 <b>Số điện thoại:</b> <code>" + escapeHtml(phone) + "</code>",
-    "💆 <b>Gói dịch vụ:</b> " + escapeHtml(packageName),
-    "👥 <b>Ưu tiên:</b> " + escapeHtml(preference || "Không yêu cầu"),
-    "📝 <b>Ghi chú:</b> " + escapeHtml(note || "—"),
-    "🕒 <b>Thời gian:</b> " + escapeHtml(timeStr),
-    "━━━━━━━━━━━━━━━━━━━━━━"
-  ];
+  var messageText = "";
+  if (fullMessage && typeof fullMessage === "string" && fullMessage.trim().length > 10) {
+    messageText = fullMessage;
+  } else {
+    var messageLines = [
+      "🌿 <b>[TOUCH ART] CÓ YÊU CẦU TƯ VẤN MỚI</b>",
+      "━━━━━━━━━━━━━━━━━━━━━━",
+      "👤 <b>Họ tên:</b> " + escapeHtml(name),
+      "📞 <b>Số điện thoại:</b> <code>" + escapeHtml(phone) + "</code>",
+      "💆 <b>Gói dịch vụ:</b> " + escapeHtml(packageName),
+      "👥 <b>Ưu tiên KTV:</b> " + escapeHtml(preference || "Không yêu cầu"),
+      "📝 <b>Ghi chú riêng:</b> " + escapeHtml(note || "—"),
+      "🕒 <b>Thời gian:</b> " + escapeHtml(timeStr),
+      "━━━━━━━━━━━━━━━━━━━━━━",
+      "✨ <i>Khách hàng đang chờ phản hồi từ Touch Art.</i>"
+    ];
+    messageText = messageLines.join("\n");
+  }
 
   var payload = {
     chat_id: TELEGRAM_CHAT_ID,
-    text: messageLines.join("\n"),
-    parse_mode: "HTML"
+    text: messageText,
+    parse_mode: fullMessage ? "" : "HTML"
   };
 
   var options = {

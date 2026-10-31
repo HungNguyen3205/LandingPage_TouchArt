@@ -79,4 +79,61 @@ export function GardenBranch({className=''}:{className?:string}){
     </svg>
   );
 }
-export default function GardenAtmosphere({locale}:{locale:Locale}){const [paused,setPaused]=useState(()=>typeof matchMedia!=='undefined'&&matchMedia('(prefers-reduced-motion: reduce)').matches);const id=useId().replace(/:/g,'');const vi=locale==='vi';useEffect(()=>{const media=matchMedia('(prefers-reduced-motion: reduce)');const handler=()=>setPaused(media.matches);media.addEventListener('change',handler);return()=>media.removeEventListener('change',handler)},[]);useEffect(()=>{document.documentElement.dataset.gardenPaused=String(paused);const visibility=()=>{document.documentElement.dataset.gardenPaused=String(paused||document.hidden)};document.addEventListener('visibilitychange',visibility);return()=>{document.removeEventListener('visibilitychange',visibility);delete document.documentElement.dataset.gardenPaused}},[paused]);return <><div className="garden-atmosphere" aria-hidden="true"><div className="falling-leaf leaf-main"><div className="leaf-tumble"><LeafShape id={'leaf-'+id}/></div></div><div className="falling-leaf leaf-far"><div className="leaf-tumble"><LeafShape id={'far-'+id}/></div></div></div><button className="garden-motion-control" onClick={()=>setPaused(!paused)} aria-pressed={paused} aria-label={paused?(vi?'Tiếp tục chuyển động':'Resume gentle motion'):(vi?'Dừng chuyển động':'Pause gentle motion')} title={paused?(vi?'Tiếp tục chuyển động':'Resume gentle motion'):(vi?'Dừng chuyển động':'Pause gentle motion')}>{paused?<Play size={14}/>:<Pause size={14}/>}<span>{vi?'Một nhịp chậm':'A slower rhythm'}</span></button></>}
+export default function GardenAtmosphere({locale}:{locale:Locale}){
+  const [paused, setPaused] = useState(false);
+  const id = useId().replace(/:/g, '');
+  const vi = locale === 'vi';
+
+  useEffect(() => {
+    // Keep animation running unless explicitly paused by user
+    document.documentElement.dataset.gardenPaused = String(paused);
+    return () => {
+      delete document.documentElement.dataset.gardenPaused;
+    };
+  }, [paused]);
+
+  return (
+    <>
+      <div className="garden-atmosphere" aria-hidden="true">
+        {/* Leaf 1: Gentle left drifting leaf */}
+        <div className="falling-leaf leaf-pos-1">
+          <div className="leaf-tumble">
+            <LeafShape id={'leaf-1-' + id} />
+          </div>
+        </div>
+
+        {/* Leaf 2: Center-left delicate gold-touched leaf */}
+        <div className="falling-leaf leaf-pos-2">
+          <div className="leaf-tumble tumble-slow">
+            <LeafShape id={'leaf-2-' + id} />
+          </div>
+        </div>
+
+        {/* Leaf 3: Classic main leaf drifting on right */}
+        <div className="falling-leaf leaf-main leaf-pos-3">
+          <div className="leaf-tumble">
+            <LeafShape id={'leaf-3-' + id} />
+          </div>
+        </div>
+
+        {/* Leaf 4: Distant softer leaf on far right */}
+        <div className="falling-leaf leaf-far leaf-pos-4">
+          <div className="leaf-tumble tumble-gentle">
+            <LeafShape id={'leaf-4-' + id} />
+          </div>
+        </div>
+      </div>
+
+      <button
+        className="garden-motion-control"
+        onClick={() => setPaused(!paused)}
+        aria-pressed={paused}
+        aria-label={paused ? (vi ? 'Tiếp tục chuyển động lá rơi' : 'Resume gentle motion') : (vi ? 'Dừng chuyển động lá rơi' : 'Pause gentle motion')}
+        title={paused ? (vi ? 'Tiếp tục chuyển động lá rơi' : 'Resume gentle motion') : (vi ? 'Dừng chuyển động lá rơi' : 'Pause gentle motion')}
+      >
+        {paused ? <Play size={14} /> : <Pause size={14} />}
+        <span>{vi ? 'Một nhịp chậm' : 'A slower rhythm'}</span>
+      </button>
+    </>
+  );
+}

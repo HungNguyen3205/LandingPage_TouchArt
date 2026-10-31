@@ -250,10 +250,10 @@ export default function App(){
         {/* APPROACH & NOTES SECTION */}
         <section data-reveal className="section approach wrap" id="approach">
           <div className="approach-photo">
-            <img src="/images/first-home.svg" alt="Your body is your first home. Treat it with care." loading="lazy"/>
-            <span className="photo-label">THE TOUCH OF CARE</span>
-            <div className="circle-stamp">
-              touch art<br/><Leaf size={26}/><small>with intention</small>
+            <img src="/images/touchcare.jpg" alt="Your body is your first home. Treat it with care." loading="lazy"/>
+            
+            <div className="circle-stamp circle-stamp-img">
+              <img src="/images/logo.jpg" alt="Touch Art with intention" />
             </div>
           </div>
           <div className="approach-copy treatment-notes">

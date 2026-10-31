@@ -87,13 +87,33 @@
 }
 
 /* Crystal-clear massage image: Remove scale-blur animation, optimize contrast & sharpness */
-/* Crystal-clear massage image: Remove scale-blur animation, optimize contrast & sharpness */
 .garden-landscape > img {
   image-rendering: -webkit-optimize-contrast !important;
   image-rendering: high-quality !important;
-  filter: saturate(1.06) contrast(1.08) brightness(0.97) !important;
+  filter: saturate(1.1) contrast(1.1) brightness(0.96) !important;
   transform: none !important;
   animation: none !important; /* Stop continuous scaling blur on high-DPI screens */
+}
+
+/* Desktop Mist: Wrap text column softly on left, leave head, body and massage table 100% uncovered */
+.garden-hero .garden-mist {
+  position: absolute !important;
+  inset: 0 !important;
+  background: 
+    linear-gradient(90deg, 
+      #f4f3ec 0%, 
+      #f4f3ec 28%, 
+      rgba(244, 243, 236, 0.85) 38%, 
+      rgba(244, 243, 236, 0.3) 46%, 
+      transparent 52%
+    ),
+    linear-gradient(0deg, 
+      #f4f3ec 0%, 
+      rgba(244, 243, 236, 0.5) 15%, 
+      transparent 28%
+    ) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
 }
 
 /* Hide background clutter elements that clash with client sample */

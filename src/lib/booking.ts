@@ -29,6 +29,11 @@ export function message(r:Request,locale:Locale) {
  ...(r.note.trim()?[(vi?'Lời nhắn: ':'Note: ')+r.note.trim()]:[]),
  vi?'Đây là yêu cầu, chưa phải lịch hẹn đã xác nhận.':'This is a request, not a confirmed appointment.'].join('\n');
 }
-export function whatsappUrl(phone:string,text:string){if(!/^\+?[1-9]\d{7,14}$/.test(phone))return null;return 'https://wa.me/'+phone.replace('+','')+'?text='+encodeURIComponent(text);}
+export function whatsappUrl(wa:string, text:string){
+  if(!wa) return '';
+  if(wa.startsWith('http')) return wa;
+  if(!/^\+?[1-9]\d{7,14}$/.test(wa)) return '';
+  return 'https://wa.me/' + wa.replace('+','') + (text ? '?text=' + encodeURIComponent(text) : '');
+}
 
 export function estimate(serviceId:string,duration:number,time:string){const service=services.find(s=>s.id===serviceId);const base=service?.prices[service.durations.indexOf(duration)]??null;const hour=Number(time.split(':')[0]);const surcharge=time&&Number.isFinite(hour)?(hour<9?200000:hour>=22?100000:0):0;return {base,surcharge,total:base===null?null:base+surcharge};}

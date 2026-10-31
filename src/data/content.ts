@@ -1,16 +1,23 @@
 export type Locale = 'vi' | 'en';
 const envGoogleScriptUrl = typeof import.meta !== 'undefined' && (import.meta as any).env ? ((import.meta as any).env.VITE_GOOGLE_SCRIPT_URL || '') : '';
 export const config = {
-  demo: true,
-  whatsapp: '',
-  zalo: '',
-  email: '',
+  demo: false,
+  whatsapp: 'https://wa.me/qr/L4PAOFWUCOGEB1',
+  zalo: 'https://zaloapp.com/qr/p/106uuln7yal0f',
+  email: 'contact@touchart.vn',
   address: '22 An Thượng 6, Mỹ An, Ngũ Hành Sơn, Đà Nẵng',
-  telegram: '',
-  messenger: '',
-  wechat: '',
-  kakao: '',
+  telegram: 'https://t.me/DNXspace',
+  facebook: 'https://www.facebook.com/share/1cJVqZHZUj/?mibextid=wwXIfr',
+  messenger: 'https://www.facebook.com/share/1cJVqZHZUj/?mibextid=wwXIfr',
+  wechat: 'https://u.wechat.com/kDomFKDY7I-uOUWCQ-aIb_M?s=2',
+  kakao: 'http://qr.kakao.com/talk/B0UkwXyxe0BMvIkmDw9jM.WYDSU-',
   phone: '',
+  qrImages: {
+    telegram: '/images/qr-telegram.png',
+    zalo: '/images/qr-zalo.png',
+    wechat: '/images/qr-wechat.png',
+    kakao: '/images/qr-kakao.png'
+  },
   community: 'https://touchart.vn/community',
   googleScriptUrl: envGoogleScriptUrl || 'https://script.google.com/macros/s/AKfycbyoDAEiAwH-5ETu_mLZ5eKE-7zylalRLMzjlLifvdM7A-9NQk7EEe0Hop048AlJX1w0/exec'
 };

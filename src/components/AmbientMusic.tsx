@@ -22,8 +22,8 @@ export default function AmbientMusic({ locale }: { locale: Locale }) {
           setIsPlaying(true);
         })
         .catch(() => {
-          // Browser prevented unmuted autoplay before user gesture.
-          // Listen for the first touch or click anywhere on the page to automatically start.
+          // Browser prevented autoplay without user gesture.
+          // Listen for first interaction anywhere on the document.
           setIsPlaying(false);
 
           const handleFirstGesture = () => {
@@ -63,32 +63,38 @@ export default function AmbientMusic({ locale }: { locale: Locale }) {
   };
 
   return (
-    <aside className="ambient-player" aria-label={vi ? 'Nhạc nền thư giãn' : 'Ambient background music'}>
+    <aside className="ambient-player" aria-label={vi ? 'Nhạc thư giãn Touch Art' : 'Touch Art ambient sound'}>
+      <div className="ambient-deck-quote" aria-hidden="true">
+        <em>{vi ? 'Lắng nghe cơ thể.' : 'Listen to your body.'}</em>
+        <span>{vi ? 'Chăm sóc theo cách của bạn.' : 'Care tailored to you.'}</span>
+      </div>
       <div className="ambient-player-main">
         <button
           type="button"
           onClick={toggleAudio}
+          className="ambient-pill-btn"
           aria-label={
             isPlaying
               ? vi ? 'Tạm dừng nhạc thư giãn' : 'Pause relaxing music'
-              : vi ? 'Bật nhạc thư giãn' : 'Play relaxing music'
+              : vi ? 'Lắng nghe & thả lỏng' : 'Listen & unwind'
           }
         >
-          {isPlaying ? (
-            <>
-              <div className="music-waves" aria-hidden="true">
+          <span className="ambient-pill-icon" aria-hidden="true">
+            {isPlaying ? (
+              <div className="music-waves">
                 <i />
                 <i />
                 <i />
               </div>
-              <span>{vi ? 'Nhạc thư giãn · Đang phát' : 'Relaxing music · Playing'}</span>
-            </>
-          ) : (
-            <>
-              <Music2 size={16} aria-hidden="true" />
-              <span>{vi ? 'Bật nhạc thư giãn' : 'Play relaxing music'}</span>
-            </>
-          )}
+            ) : (
+              <Music2 size={16} />
+            )}
+          </span>
+          <span className="ambient-pill-label">
+            {isPlaying
+              ? (vi ? 'Đang phát · Nhạc thư giãn' : 'Playing · Relaxing music')
+              : (vi ? 'Lắng nghe & thả lỏng' : 'Listen & unwind')}
+          </span>
         </button>
       </div>
       <audio

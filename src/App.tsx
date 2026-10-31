@@ -194,7 +194,7 @@ export default function App(){
           <a href="#community" onClick={()=>setMenu(false)}>{vi?'Cộng đồng':'Community'}</a>
         </nav>
         <div className="header-actions">
-          <button className="language" onClick={()=>{setLocale(vi?'en':'vi');location.href=vi?'/en/':'/vi/'}} aria-label={vi?'Switch to English':'Chuyển sang tiếng Việt'}>
+          <button className="language" onClick={()=>{const next = vi?'en':'vi'; setLocale(next); window.history.replaceState(null, '', next === 'vi' ? '/' : '/en/');}} aria-label={vi?'Switch to English':'Chuyển sang tiếng Việt'}>
             {vi?'VI':'EN'} <span>/ {vi?'EN':'VI'}</span>
           </button>
           <a className="header-book" href="#booking">{t.book}<ArrowUpRight size={15}/></a>
@@ -231,8 +231,8 @@ export default function App(){
               <a className="hero-explore" href="#treatments">{t.explore} ↓</a>
             </div>
           </div>
+
           <div className="hero-bottom wrap">
-            
             <a href="#approach" aria-label={vi?'Cuộn xuống':'Scroll down'}><ArrowDown size={18}/></a>
             <span>BODY · MIND · ALL GENDERS WELCOME</span>
           </div>

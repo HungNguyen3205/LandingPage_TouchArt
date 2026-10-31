@@ -94,7 +94,7 @@ export const services = [
 export const copy = {
   vi: {
     nav: ['Tinh thần', 'Dịch vụ', 'Trải nghiệm', 'Đặt lịch'],
-    book: 'Chọn khoảng nghỉ',
+    book: 'Đặt lịch hẹn',
     eyebrow: 'MASSAGE · BODYWORK · SELF-CARE',
     hero: 'Chạm sâu.\nThả lỏng.\nTrở về mình.',
     intro: 'Dành riêng cho bạn một khoảng thư thái. Chia sẻ nhu cầu qua biểu mẫu, nhắn tin chọn nhà trị liệu yêu thích và đặt hẹn theo cách của bạn.',
@@ -131,7 +131,7 @@ export const copy = {
   },
   en: {
     nav: ['Our approach', 'Treatments', 'Experience', 'Booking'],
-    book: 'Find your pause',
+    book: 'Book appointment',
     eyebrow: 'MASSAGE · BODYWORK · SELF-CARE',
     hero: 'A deeper touch.\nLet go.\nReturn to yourself.',
     intro: 'A peaceful pause just for you. Share your preferences through the form, connect privately to choose your therapist, and book on your own terms.',
